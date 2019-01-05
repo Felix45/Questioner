@@ -10,39 +10,48 @@
 		<script src="../static/js/main.js"></script> 
 	</head>
 	
-	<body>
+	<body id="top">
 		<!-- Content of body section -->
 		
 		<div class="container">
-			<div class="row header">
+		 <header>
+			<div class="row">
 				<!-- Uniform application header section -->
-					<div class="column-lg-2 column-md-2 column-sm-2 column-xs-2">
+					<div class="column-lg-2 column-md-2 column-sm-1 column-xs-2">
 						<div class="logo">
 						  <a href="" title="go to home">
 							<img src="../static/images/logo.png" class="img" alt="Questioner" />		
 						  </a>				
 						</div>
+						<div class="logo-mobile">
+							<button class="button-rounded">
+								<span class="fa fa-list fa-2x"></span>
+							</button>
+						</div>
 					</div>
-					<div class="column-lg-6 column-md-6 column-sm-6 column-xs-6">
+					<div class="column-lg-6 column-md-6 column-sm-6 column-xs-10">
 						<form method="post" action="">
 							<input type="search" name="search" placeholder="Search Meetup" class="input input-long" />
 							<button type="submit" class="button button-short"><span class="fa fa-search"></span></button>						
 						</form>
 					</div>
 					<div class="column-lg-4 column-md-4 column-sm-4 column-xs-4">
-						<ul class="menu">
+					  <nav class="menu">
+						<ul>
 							<li><a href=""> <span class="fa fa-user-o"></span> Administrator </a></li>	
 							<li><a href=""> <span class="fa fa-sign-in"></span> Login </a> </li>	
 							<li><a href=""> <span class="fa fa-user-o"></span> Sign Up </a></li>				
-						</ul>					
+						</ul>	
+					   </nav>				
 					</div>				
 				
 				<!-- End uniform application header section -->
 			</div>
+		</header>
 			
 			
 			<!-- Start the popular meetups section -->
-		<div class="main">
+		<main>
 			<div class="row">
 				<h2>Popular Meetups</h2>
 				<div class="column-lg-3 column-md-3 column-sm-4 column-xs-6">
@@ -146,16 +155,18 @@
 			</div>
 			
 			<!-- End the popular meetups section -->		
-		</div>
+		</main>
 	 </div>
 		
 		<!-- Start footer section -->
-		<div class="row footer">
+		<footer>
 			<div class="column-lg-12 column-md-12 column-sm-12 column-xs-12">
 				<a href="" title="Questioner">&copy;Questioner 2019</a>
-				<span id="scroll-top" class="fa fa-angle-up fa-lg">
+				<a id="scroll-top" href="#top" class="fa fa-angle-up fa-lg">
+				
+				</a>
 			</div>		
-		</div>
+		</footer>
 		
 		<!-- End the footer section -->
 	
