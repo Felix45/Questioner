@@ -126,6 +126,9 @@ div[class*='column-']{
 	padding: 10px 0px;
 	border-bottom: 1px solid #ddd;
 }
+.main .cards .meetup{
+	margin-top: 10px;
+}
 .main .cards .attending{
 	padding: 15px;
 	cursor: pointer;
@@ -136,6 +139,27 @@ div[class*='column-']{
 	color: #fff;
 	border-radius: 50%;
 	text-align: center;
+}
+
+.footer{
+	color: #fff;
+	margin: 0;
+	padding:30px;
+	position: relative;
+	background-color: #009688;
+}
+.footer a{
+	color: #fff;
+}
+.footer #scroll-top{
+	padding: 15px;
+   position: absolute;
+   right: 30px;
+   bottom: 75px;
+   color: #fff;
+   cursor: pointer;
+   border-radius: 5px;
+   background-color: #000;
 }
 
 /* Columns for mobile phones */
