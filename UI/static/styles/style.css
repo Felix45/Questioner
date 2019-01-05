@@ -150,21 +150,45 @@ main .cards .meetup{
 }
 
 main .cards .attending{
-	padding: 15px;
-	cursor: pointer;
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	background: #009688;
-	color: #fff;
-	border-radius: 50%;
-	text-align: center;
+	 padding: 15px;
+    cursor: pointer;
+    position: absolute;
+    right: -15px;
+    bottom: 30px;
+    background: #009688;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
 }
 main .meetup .meetup-details{
 	font-size: 12px;
 	font-weight: bold;
 	padding: 5px;
 
+}
+.drawer-menu{
+	width: 100%;
+	height: 100%;
+	top:0;
+	left:0;
+	z-index: 9999;
+	position: fixed;
+	display: none;
+}
+.drawer-menu ul{
+	width: 70%;
+	height: 100%;
+	background-color: #fff;
+	border-right: 1px solid #ddd;
+}
+.drawer-menu ul li{
+	color: #009688;
+	padding: 10px;
+	border-bottom: 1px dotted #009688;
+}
+.drawer-menu ul li a{
+	color: #009688;
+	display: block;
 }
 
 footer{
