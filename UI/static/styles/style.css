@@ -103,11 +103,12 @@ header{
 		-webkit-box-shadow: 5px 5px 5px #ddd;
 		box-shadow: 5px 5px 5px #ddd;
 }
-header .logo , .header .menu{
+header .logo , header .menu{
 		display: none;
 }
 header .logo-mobile button{
 		padding: 5px;
+		margin-left: 20px;
 		background-color: #fff;
 }
 
@@ -147,6 +148,7 @@ main .cards h4{
 main .cards .meetup{
 	margin-top: 10px;
 }
+
 main .cards .attending{
 	padding: 15px;
 	cursor: pointer;
@@ -157,6 +159,12 @@ main .cards .attending{
 	color: #fff;
 	border-radius: 50%;
 	text-align: center;
+}
+main .meetup .meetup-details{
+	font-size: 12px;
+	font-weight: bold;
+	padding: 5px;
+
 }
 
 footer{
