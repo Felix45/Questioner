@@ -20,6 +20,7 @@ body, div, p , h1 , h2 , h3 , h4 , h5 , h6 , ul , ol , form{
 ul , li{
 	list-style-type: none;
 }
+
 a{
 		text-decoration: none;
 }
@@ -65,9 +66,17 @@ div[class*='column-']{
 		margin: auto;
 		
 }
+.center-text{
+		text-align: center;
+}
 .input{
 		border: 1px solid #ddd;
 		padding: 10px;
+}
+.input-field{
+	width: 90%;
+	display: block;
+	margin: 10px auto;
 }
 .input-long{
 	width:80%;
@@ -87,8 +96,7 @@ div[class*='column-']{
 	border:1px solid #ddd;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
-	border-radius: 5px;
-	
+	border-radius: 5px;	
 }
 header{
 		position: fixed;
@@ -165,6 +173,26 @@ main .meetup .meetup-details{
 	font-weight: bold;
 	padding: 5px;
 
+}
+main form{
+	width: 90%;
+	margin: auto;
+	padding: 50px 30px;
+	border: 1px solid #ddd;
+   -webkit-box-shadow: 0 2px 5px 0 #ddd, 0 2px 10px 0 #ddd;
+   -moz-box-shadow: 0 2px 5px 0 #ddd,0 2px 10px 0 #ddd;
+   box-shadow: 0 2px 5px 0 #ddd, 0 2px 10px 0 #ddd;
+	
+}
+main form a {
+	color: #009688;
+}
+main form fieldset{
+	color: #000;
+	border:1px solid #ddd;
+}
+main form fieldset legend{
+	margin-left: 20px;
 }
 .drawer-menu{
 	width: 100%;
@@ -293,6 +321,9 @@ footer #scroll-top{
 		.column-sm-12{
 			width: 100%;
 		}
+		main form{
+			width: 60%;
+		}
 }
 
 /*columns and styles for medium devices */
@@ -349,7 +380,9 @@ footer #scroll-top{
 		}
 		header .logo-mobile{ display: none; }
 
-
+		main form{
+			width: 50%;
+		}
 
 }
 
@@ -408,5 +441,7 @@ footer #scroll-top{
 		}
 		header .logo-mobile{ display: none; }
 
-
+		main form{
+			width: 50%;
+		}
 }
