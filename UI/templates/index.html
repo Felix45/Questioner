@@ -4,17 +4,39 @@
 		<title>Questioner - Questioner helps a meetup organizer prioritize questions to be answered</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width , initial-scale=1.0">
-		<link rel="stylesheet" href="styles/style.css" />
-		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+		<link rel="stylesheet" href="../static/styles/style.css" />
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<script src="js/main.js"></script> 
+		<script src="../static/js/main.js"></script> 
 	</head>
 	
 	<body>
 		<!-- Content of body section -->
 		<div class="container">
-			<div class="row">
-			
+			<div class="row header">
+				<!-- Uniform application header -->
+					<div class="column-lg-2 column-md-2 column-sm-2 column-xs-2">
+						<div class="logo">
+						  <a href="" title="go to home">
+							<img src="../static/images/logo.png" class="img" alt="Questioner" />		
+						  </a>				
+						</div>
+					</div>
+					<div class="column-lg-6 column-md-6 column-sm-6 column-xs-6">
+						<form method="post" action="">
+							<input type="search" name="search" placeholder="Search Meetup" class="input input-long" />
+							<button type="submit" class="button button-short"><span class="fa fa-search"></span></button>						
+						</form>
+					</div>
+					<div class="column-lg-4 column-md-4 column-sm-4 column-xs-4">
+						<ul class="menu">
+							<li><a href=""> <span class="fa fa-user-o"></span> Administrator </a></li>	
+							<li><a href=""> <span class="fa fa-sign-in"></span> Login </a> </li>	
+							<li><a href=""> <span class="fa fa-user-o"></span> Sign Up </a></li>				
+						</ul>					
+					</div>				
+				
+				<!-- End uniform application header-->
 			</div>		
 		</div>
 	

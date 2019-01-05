@@ -1,0 +1,167 @@
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	
+}
+@font-face{
+		src:url('https://fonts.googleapis.com/css?family=Raleway')
+
+}
+html,body{
+	width:100%;
+	height:100%;
+}
+body, div, p , h1 , h2 , h3 , h4 , h5 , h6 , ul , ol , form{
+		font-family: 'Raleway';
+		margin: 0;
+		padding: 0;
+		color: #009688;
+}
+ul , li{
+	list-style-type: none;
+}
+a{
+		text-decoration: none;
+}
+.container{
+	width: auto;
+	height: auto;
+	margin: 0 auto;
+	padding-left: 15px;
+	padding-right: 15px;
+	position: relative;	
+}
+
+.container::before, .container::after {
+    content: " ";
+    display: table;
+}
+
+.row{
+	margin: 0 -15px;
+
+}
+div[class*='column-']{
+	float:left;
+	padding: 10px 15px;
+}
+
+
+.row::before, .row::after {
+    content: " ";
+    display: table;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.img{
+		width: auto;
+		max-width: 100%;
+		display: block;
+		margin: auto;
+		
+}
+.input{
+		border: 1px solid #ddd;
+		padding: 10px;
+}
+.input-long{
+	width:90%;
+	border-right: none;
+}
+.button{
+		padding: 10px 20px;
+		color: #fff;
+		border: 1px solid #009688;
+		background-color: #009688;
+}
+.button-short{
+	width:10%;
+	float: right;
+}
+.header{
+		position: fixed;
+		top: 0;
+		left: 0;
+		margin: 0;
+		width: 100%;
+		border-bottom: 1px solid #ddd;
+		-moz-box-shadow: 5px 5px 5px #ddd;
+		-webkit-box-shadow: 5px 5px 5px #ddd;
+		box-shadow: 5px 5px 5px #ddd;
+}
+.menu li{
+		display: inline-block;
+}
+.menu li a{
+	color: #009688;
+	padding: 10px;
+}
+.column-xs-1{
+	width: 8.3333%;
+}
+.column-xs-2{
+	width: 16.6667%;
+}
+.column-xs-3{
+	width: 25%;
+}
+.column-xs-4{
+	width: 33.3333%;
+}
+.column-xs-5{
+	width: 41.6667%;
+}
+.column-xs-6{
+	width: 50%;
+}
+.column-xs-7{
+	width: 58.3333%;
+}
+.column-xs-8{
+	width: 66.66667%;
+}
+.column-xs-9{
+	width: 75%;
+}
+.column-xs-10{
+	width: 83.33333%;
+}
+.column-xs-11{
+	width: 91.66667%;
+}
+.column-xs-12{
+	width: 100%;
+}
+
+
+/* columns and styles for tablet */
+@media(min-width: 768px) and (max-width: 991px){
+		.container{
+			width: 750px;		
+		}
+
+}
+
+/*columns and styles for medium devices */
+@media(min-width: 992px) and (max-width: 1199px){
+	.container{
+			width: 970px;	
+	}
+
+
+}
+
+/*columns and styles for large devices */
+@media(min-width: 1200px){
+		.container{
+			width:1170px;		
+		}
+
+
+}
