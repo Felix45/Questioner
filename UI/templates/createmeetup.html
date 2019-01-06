@@ -73,14 +73,15 @@
 					   </div>
 						<div class="divider"></div>
 								<div class="row">
+									
 								 <div class="">
 								 	<div class="column-lg-12 column-md-12 column-sm-12 column-xs-12">
 								 	<nav>
 							   		<ul>
-							   			<li><a href="" class="block"><span class="fa fa-plus"></span> Add Meetup</a></li>
-							   			<li><a href="" class="block"><span class="fa fa-trash-o"></span> Delete Meetup</a></li>
-							   			<li><a href="" class="block"><span class="fa fa-eye"></span> View Meetups</a></li>
-							   			<li><a href="" class="block"><span class="fa fa-sign-out"></span> Sign Out</a></li>
+							   			<li><a href="" class="block success"><span class="fa fa-plus"></span> Add Meetup</a></li>
+							   			<li><a href="" class="block danger"><span class="fa fa-trash-o"></span> Delete Meetup</a></li>
+							   			<li><a href="" class="block info"><span class="fa fa-eye"></span> View Meetups</a></li>
+							   			<li><a href="" class="block warning"><span class="fa fa-sign-out"></span> Sign Out</a></li>
 							   		</ul>
 							   	  </nav>
 							   	</div>	
@@ -92,42 +93,41 @@
 				
 				<div class="dashboard column-lg-9 column-md-9 column-sm-9 column-xs-12">
 					<div class="row admin">
-						<div class="column-lg-6 column-md-6 column-sm-6 column-xs-6">
-							<div class="center-text success admin-action">
-									<a href="" class="block">Add a Meetup </a>
-							</div>
-							<span class="fa fa-plus fa-lg success admin-action-type"></span>
-						</div>
+						<h2>Add Meetup 
+							<span class="fa-stack">
+  									<i class="fa fa-circle-thin fa-stack-2x"></i>
+  									<i class="fa fa-plus fa-stack-1x"></i>
+							</span>
+						</h2>	
 						
-						<div class="column-lg-6 column-md-6 column-sm-6 column-xs-6">
-							<div class="center-text danger admin-action">
-									<a href="" class="block">Delete a Meetup </a>
-							</div>
-							<span class="fa fa-trash-o fa-lg danger admin-action-type"></span>
+						<div class="column-lg-12 column-md-12 colum-sm-12 column-xs-12">
+							<form method="post" action="">
+							  <div>
+							  	<input type="text" name="title" class="input input-field" />
+							  </div>
+							  
+							  <div>
+							  	<input type="text" name="venue" class="input input-field" />
+							  </div>
+							  <div>
+							  	<input type="date" name="date" class="input input-field" />
+							  </div>
+							  <div>
+							  	<input type="file" name="file" class="input input-field" />
+							  </div>
+							  
+							  <div>
+							  	<button type="submit" class="button input-field" name="file" class="input input-field">
+							  		Add Meetup <span class="fa fa-plus"></span>
+							  	</button>
+							  </div>
+							  
+							</form>
 						</div>
-					
 					</div>
 					<div class="row">
 						<div class="divider"></div>					
 					</div>
-					
-					<div class="row admin">
-						<div class="column-lg-6 column-md-6 column-sm-6 column-xs-6">
-							<div class="center-text info admin-action">
-									<a href="" class="block">View all Meetups </a>
-							</div>
-							<span class="fa fa-eye fa-lg info admin-action-type"></span>
-						</div>
-						
-						<div class="column-lg-6 column-md-6 column-sm-6 column-xs-6">
-							<div class="center-text warning admin-action">
-									<a href="" class="block">Sign Out </a>
-							</div>
-							<span class="fa fa-sign-out fa-lg warning admin-action-type"></span>
-						</div>
-					
-					</div>
-					
 				</div>
 			
 			</div>
