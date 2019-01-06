@@ -317,6 +317,7 @@ main .admin-action-type{
 	background-color: #fff;
 }
 .modal .modal-body .close{
+	cursor: pointer;
 	 color: #fff;
     padding: 15px;
     position: absolute;
