@@ -82,6 +82,7 @@ div[class*='column-']{
 	width:80%;
 }
 .button{
+		cursor: pointer;
 		padding: 10px 20px;
 		color: #fff;
 		border: 1px solid #009688;
@@ -175,9 +176,9 @@ main .meetup .meetup-details{
 
 }
 main form{
-	width: 90%;
+	width: 100%;
 	margin: auto;
-	padding: 50px 30px;
+	padding: 50px 8px;
 	border: 1px solid #ddd;
    -webkit-box-shadow: 0 2px 5px 0 #ddd, 0 2px 10px 0 #ddd;
    -moz-box-shadow: 0 2px 5px 0 #ddd,0 2px 10px 0 #ddd;
