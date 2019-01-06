@@ -57,42 +57,59 @@
 			
 			<div class="row">
 				<div class="column-lg-3 column-md-3 column-sm-3 column-xs-12">
-					<div>
+					<div class="profile">
 					   <div class="center-text">
-								<span class="fa fa-user-o fa-3x"></span>					   
+								<a href="" title="Questioner">
+									<span class="fa-stack fa-2x">
+										<i class="fa fa-circle fa-stack-2x"></i> 
+										<i class="fa fa-user-o fa-stack-1x fa-inverse"></i> 
+									</span>	
+							   </a>	
+							   <div class="row">
+							   	<div class="column-lg-12 column-md-12 column-sm-12 column-xs-12">
+							   		Logged In: <span>Administrator</span> 
+							   	</div>		
+							   </div>	   
 					   </div>
-						<div>Logged In: <span>Administrator</span> </div>
+						<div class="divider"></div>
 					</div>
 				
 				</div>
 				
-				<div class="column-lg-9 column-md-9 column-sm-9 column-xs-12">
-					<div class="row">
+				<div class="dashboard column-lg-9 column-md-9 column-sm-9 column-xs-12">
+					<div class="row admin">
 						<div class="column-lg-6 column-md-6 column-sm-6 column-xs-6">
-							<div class="admin-action">
-									<a href="">Add a Meetup <span class="fa fa-plus fa-2x"></span></a>
+							<div class="center-text success admin-action">
+									<a href="" class="block">Add a Meetup </a>
 							</div>
+							<span class="fa fa-plus fa-lg success admin-action-type"></span>
 						</div>
 						
 						<div class="column-lg-6 column-md-6 column-sm-6 column-xs-6">
-							<div class="admin-action">
-									<a href="">Delete a Meetup <span class="fa fa-trash-o fa-2x"></span></a>
+							<div class="center-text danger admin-action">
+									<a href="" class="block">Delete a Meetup </a>
 							</div>
+							<span class="fa fa-trash-o fa-lg danger admin-action-type"></span>
 						</div>
 					
 					</div>
-					
 					<div class="row">
+						<div class="divider"></div>					
+					</div>
+					
+					<div class="row admin">
 						<div class="column-lg-6 column-md-6 column-sm-6 column-xs-6">
-							<div class="admin-action">
-									<a href="">View all Meetups <span class="fa fa-eye fa-2x"></span></a>
+							<div class="center-text info admin-action">
+									<a href="" class="block">View all Meetups </a>
 							</div>
+							<span class="fa fa-eye fa-lg info admin-action-type"></span>
 						</div>
 						
 						<div class="column-lg-6 column-md-6 column-sm-6 column-xs-6">
-							<div class="admin-action">
-									<a href="">Sign Out <span class="fa fa-sign-out fa-2x"></span></a>
+							<div class="center-text warning admin-action">
+									<a href="" class="block">Sign Out </a>
 							</div>
+							<span class="fa fa-sign-out fa-lg warning admin-action-type"></span>
 						</div>
 					
 					</div>

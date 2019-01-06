@@ -44,6 +44,7 @@ a{
 }
 div[class*='column-']{
 	float:left;
+	position: relative;
 	padding: 10px 15px;
 }
 
@@ -69,6 +70,25 @@ div[class*='column-']{
 .center-text{
 		text-align: center;
 }
+.success{
+		background-color: #009688;
+}
+.danger{
+		background-color: #ff8080;
+}
+.info{
+		background-color: #00bfff;
+}
+.warning{
+		background-color: #9f6060;
+}
+.divider{
+		border-bottom:1px solid #ddd;
+}
+.block{
+	display: block;
+}
+
 .input{
 		border: 1px solid #ddd;
 		padding: 10px;
@@ -195,6 +215,38 @@ main form fieldset{
 main form fieldset legend{
 	margin-left: 20px;
 }
+main .dashboard{
+	border-left:1px solid #ddd;
+}
+main .profile{
+	color: #009688;
+}
+main .profile .fa-stack{
+	color: #009688;
+}
+main .admin{
+	margin: 25px 0 50px;
+}
+main .admin-action{
+	width: 100%;
+	margin:auto;
+	color: #fff;
+	/*background-color: #ddd;*/
+}
+main .admin-action a{
+	color: #fff;
+	padding: 50px 20px;
+}
+main .admin-action-type{
+	 padding: 20px;
+    border-radius: 50%;
+    color: #fff;
+    position: absolute;
+    top: -20px;
+    right: 30px;
+    border:1px solid #fff;
+}
+
 .drawer-menu{
 	width: 100%;
 	height: 100%;
@@ -325,6 +377,9 @@ footer #scroll-top{
 		main form{
 			width: 60%;
 		}
+		main .admin-action a{
+			font-size: 20px;
+		}
 }
 
 /*columns and styles for medium devices */
@@ -383,6 +438,9 @@ footer #scroll-top{
 
 		main form{
 			width: 50%;
+		}
+		main .admin-action a{
+			font-size: 20px;
 		}
 
 }
@@ -444,5 +502,8 @@ footer #scroll-top{
 
 		main form{
 			width: 50%;
+		}
+		main .admin-action a{
+			font-size: 20px;
 		}
 }
