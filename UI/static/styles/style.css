@@ -73,6 +73,9 @@ div[class*='column-']{
 .success{
 		background-color: #009688;
 }
+.success-text{
+	    color: #009688;
+}
 .danger{
 		background-color: #ff8080;
 }
@@ -83,8 +86,14 @@ div[class*='column-']{
 .info{
 		background-color: #00bfff;
 }
+.info-text{
+	color: #00bfff;
+}
 .warning{
 		background-color: #9f6060;
+}
+.warning-text{
+		color: #9f6060;
 }
 .divider{
 		border-bottom:1px solid #ddd;
@@ -153,7 +162,7 @@ header .logo-mobile button{
 .block{
 	display: block;
 }
-.no-box-shadow{
+.no-box-shadow , .cards.user{
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
 	box-shadow: none;

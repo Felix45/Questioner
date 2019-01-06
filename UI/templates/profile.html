@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Questioner - Questioner helps a meetup organizer prioritize questions to be answered</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width , initial-scale=1.0">
+		<link rel="stylesheet" href="../static/styles/style.css" />
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="../static/js/main.js"></script> 
+	</head>
+	
+	<body id="top">
+		<!-- Content of body section -->
+		
+		<div class="container">
+		 <header>
+			<div class="row">
+				<!-- Uniform application header section -->
+					<div class="column-lg-2 column-md-2 column-sm-1 column-xs-2">
+						<div class="logo">
+						  <a href="" title="go to home">
+							<img src="../static/images/logo.png" class="img" alt="Questioner" />		
+						  </a>				
+						</div>
+						<div class="logo-mobile">
+							<button class="button-rounded" onclick="menuDrawer()">
+								<span class="fa fa-list fa-2x"></span>
+							</button>
+						</div>
+					</div>
+					<div class="column-lg-6 column-md-6 column-sm-6 column-xs-10">
+						<form method="post" action="">
+							<input type="search" name="search" placeholder="Search Meetup" class="input input-long" />
+							<button type="submit" class="button button-short"><span class="fa fa-search"></span></button>						
+						</form>
+					</div>
+					<div class="column-lg-4 column-md-4 column-sm-4 column-xs-4">
+					  <nav class="menu">
+						<ul>
+							<li><a href=""> <span class="fa fa-user-o"></span> Account (Felix45) </a></li>	
+							<li><a href=""> <span class="fa fa-sign-out"></span> Sign Out </a></li>				
+						</ul>	
+					   </nav>				
+					</div>				
+				
+				<!-- End uniform application header section -->
+			</div>
+		</header>
+			
+			
+		<!-- Start the Admin dashboard delete meetup section -->
+		<main>
+			<div class="row">
+				<h2>Felix45 Profile</h2>			
+			</div>
+			
+			<div class="row">
+				<div class="column-lg-3 column-md-3 column-sm-3 column-xs-12">
+					<div class="profile">
+					   <div class="center-text">
+								<a href="" title="Questioner">
+									<span class="fa-stack fa-2x">
+										<i class="fa fa-circle fa-stack-2x"></i> 
+										<i class="fa fa-user-o fa-stack-1x fa-inverse"></i> 
+									</span>	
+							   </a>	
+							   <div class="row">
+							   	<div class="column-lg-12 column-md-12 column-sm-12 column-xs-12">
+							   		Logged In: <span>Felix45</span> 
+							   	</div>		
+							   </div>	   
+					   </div>
+						<div class="divider"></div>
+								<div class="row">
+									
+								 <div class="">
+								 	<div class="column-lg-12 column-md-12 column-sm-12 column-xs-12">
+								 	<nav>
+							   		<ul class="admin-menu">
+							   			<li><a href="" class="block success"><span class="fa fa-chart-line"></span> Popular Meetup</a></li>
+							   			<li><a href="" class="block danger"><span class="fa fa-calendar"></span> Upcoming Meetups</a></li>
+							   			<li><a href="" class="block info"><span class="fa fa-eye"></span> View all Meetups</a></li>
+							   			<li><a href="" class="block warning"><span class="fa fa-sign-out"></span> Sign Out</a></li>
+							   		</ul>
+							   	  </nav>
+							   	</div>	
+							     </div>	
+							   </div>	 
+					</div>
+				
+				</div>
+				
+				<div class="dashboard column-lg-9 column-md-9 column-sm-9 column-xs-12">
+					<div class="row admin delete-meetup">
+						<h2>Dashboard 
+							<span class="fa-stack">
+  									<i class="fa fa-circle-thin fa-stack-2x"></i>
+  									<i class="fa fa-user fa-stack-1x"></i>
+							</span>
+						</h2>	
+					</div>
+					
+					<div class="row">
+						<div class="column-lg-6 column-md-6 column-sm-6 column-xs-6">
+					<div class="cards user">
+						<h2 class="center-text" >Questions Asked ?</h2>
+						<div class="center-text meetup">
+							<a class="block" href="">
+								<span class="fa-stack fa-2x">
+										<i class="success-text fa fa-circle fa-stack-2x"></i> 
+										<i class="fa fa-question fa-stack-1x fa-inverse"></i> 
+								</span>
+							</a>
+							
+							<div class="user-activity">
+								<h2>20 Questions</h2>
+							</div>					
+						</div>
+						
+					</div>
+				</div>	
+				
+				<div class="column-lg-6 column-md-6 column-sm-6 column-xs-6">
+					<div class="cards user">
+						<h2 class="danger-text center-text">Questions Commented</h2>
+						<div class="center-text meetup">
+							<a class="block" href="">
+								<span class="fa-stack fa-2x">
+										<i class="danger-text fa fa-circle fa-stack-2x"></i> 
+										<i class="fa fa-comments-o fa-stack-1x fa-inverse"></i> 
+								</span>
+							</a>	
+								
+							<div class="user-activity">
+								<h2 class="danger-text">20 Comments</h2>
+							</div>						
+						</div>
+										</div>
+				</div>
+			</div>	
+					
+				
+			
+					<div class="row">
+						<div class="divider"></div>					
+					</div>
+					
+					<div class="row">
+						<div class="column-lg-6 column-md-6 column-sm-6 column-xs-6">
+					<div class="cards user">
+						<h2 class="info-text center-text" >Top Questions Feed</h2>
+						<div class="center-text meetup">
+							<a class="block" href="">
+								<span class="fa-stack fa-2x">
+										<i class="info-text fa fa-circle fa-stack-2x"></i> 
+										<i class="fa fa-comment-o fa-stack-1x fa-inverse"></i> 
+								</span>
+							</a>
+													
+						</div>
+						
+					</div>
+				</div>	
+				
+				<div class="column-lg-6 column-md-6 column-sm-6 column-xs-6">
+					<div class="cards user">
+						<h2 class="warning-text center-text">Sign Out</h2>
+						<div class="center-text meetup">
+							<a class="block" href="">
+								<span class="fa-stack fa-2x">
+										<i class="warning-text fa fa-circle fa-stack-2x"></i> 
+										<i class="fa fa-sign-out fa-stack-1x fa-inverse"></i> 
+								</span>
+							</a>	
+													
+						</div>
+										</div>
+				</div>
+			</div>	
+					
+						
+			
+					
+					</div>
+				</div>
+				
+		
+			
+			<!-- End the admin dashboard create meetup section -->	
+			
+				 <!-- Confirm dialog box -->
+	   
+	   <div class="modal" id="modal">
+	   	<div class="modal-body">
+	   		<div class="modal-header">
+	   			<div class="row">
+	   				<div class="column-lg-4 column-md-4 column-sm-4 column-xs-12">
+	   					<div class="cards no-box-shadow">
+								<h4>Artificial Intelligence</h4>
+									<div class="meetup">
+										<a href="">
+											<img src="../static/images/artificial.jpg" class="img" alt="Artificial Intelligence">	
+										</a>
+										<div class="meetup-details">
+											<span class="fa fa-calendar fa-lg"></span>
+											<span>  12/01/2019  Venue: Base </span>
+										</div>					
+									</div>
+									<span class="attending danger delete-meetup fa fa-trash-o" title="delete"></span>
+					    		</div>
+	   					</div>
+	   				<div class="dashboard column-lg-8 column-md-8 column-sm-8 column-xs-12">
+	   					<h2 class="danger-text">Do you want to delete this meetup ?</h2>
+	   					<div class="divider"></div>
+	   					<p class="meetup-details">Title: Artificial Intelligence</p>
+	   					<p class="meetup-details">Venue: Base</p>
+	   					<p class="meetup-details">Date: 12/01/2018</p>
+	   					<p class="meetup-details">Attending: 12</p>
+	   					<div class="divider"></div>
+	   					<div>
+	   						<p>Description: </p>
+	   						<p>lorem ipsum lorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum</p>
+								<p>lorem ipsum lorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum</p>	   					
+	   					</div>
+	   					<div class="divider"></div>
+	   					
+	   					<div class="modal-footer">
+	   					  <p>
+	   						<a class="button danger">Delete <span class="fa fa-trash-o"></span></a>
+	   					  </p>
+	   					</div>
+	   				 </div>
+	   			</div>
+	   		</div>
+	   			<span class="fa fa-times danger close" onclick="displayModal()"></span>
+	   	</div>
+	   
+	   </div>
+	   
+	   <!-- End Confirm dialog box -->
+	   	
+			
+		
+		</main>
+	 </div>
+		
+		<!-- Start footer section -->
+		<footer>
+			<div class="column-lg-12 column-md-12 column-sm-12 column-xs-12">
+				<a href="" title="Questioner">&copy;Questioner 2019</a>
+				<a id="scroll-top" href="#top" class="fa fa-angle-up fa-lg">
+				
+				</a>
+			</div>		
+		</footer>
+		
+		<!-- End the footer section -->
+	   
+	   <!-- Drawer menu for tablet and mobile devices -->
+	    <div class="drawer-menu" id="mobile-menu">
+	    	<ul>
+				<li><a href=""><span class="fa fa-home"></span> Questioner </a></li>
+				<li><a href=""><span class="fa fa-sign-in"></span> Sign In </a></li>
+				<li><a href=""><span class="fa fa-user-o"></span> Sign Up </a></li>
+				<li><a href=""><span class="fa fa-user-o"></span> Administrator</a></li>	    	
+	    	</ul>
+	    </div>
+	   
+	   <!-- End Drawer menu -->
+	   
+	  
+	
+		<!-- End of body section -->
+	</body>
+</html>
