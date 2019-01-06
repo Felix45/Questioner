@@ -76,6 +76,10 @@ div[class*='column-']{
 .danger{
 		background-color: #ff8080;
 }
+.danger-text{
+		color: #ff8080;
+		font-weight: normal;
+}
 .info{
 		background-color: #00bfff;
 }
@@ -165,7 +169,7 @@ main h2{
     margin: 0 15px 10px 15px;
     border-bottom: 1px solid #ddd;
 }
-main .cards{
+main .cards , .modal .cards{
 	position:relative;
 	padding: 10px;
 	margin-bottom: 30px;
@@ -174,16 +178,16 @@ main .cards{
 	-moz-box-shadow: 0 2px 5px 0 #ddd,0 2px 10px 0 #ddd;
 	box-shadow: 0 2px 5px 0 #ddd,0 2px 10px 0 #ddd;
 }
-main .cards h4{
+main .cards h4 , .modal .cards h4{
 	font-weight: normal;
 	padding: 10px 0px;
 	border-bottom: 1px solid #ddd;
 }
-main .cards .meetup{
+main .cards .meetup , .modal .cards .meetup{
 	margin-top: 10px;
 }
 
-main .cards .attending{
+main .cards .attending , .modal .cards .attending{
 	 padding: 15px;
     cursor: pointer;
     position: absolute;
@@ -194,11 +198,14 @@ main .cards .attending{
     border-radius: 50%;
     text-align: center;
 }
-main .meetup .meetup-details{
+main .meetup .meetup-details, .modal .meetup .meetup-details{
 	font-size: 12px;
 	font-weight: bold;
 	padding: 5px;
 
+}
+main .cards .delete-meetup  , .modal .cards .delete-meetup{
+	background: #ff8080;
 }
 main form{
 	width: 100%;
@@ -237,6 +244,11 @@ main .profile .fa-stack{
 main .admin{
 	margin: 25px 0 50px;
 }
+main .delete-meetup{
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
 main .admin-action{
 	width: 100%;
 	margin:auto;
@@ -281,6 +293,45 @@ main .admin-action-type{
 .drawer-menu ul li a{
 	color: #009688;
 	display: block;
+}
+
+.modal{
+	width: 100%;
+	height: 100%;
+	position:absolute;
+	left:0;
+	top:0;
+	display: none;
+	z-index: 99999;
+}
+.modal .dashboard p{
+	padding: 10px 10px 0;
+
+}
+.modal .modal-body{
+	width:80%;
+	position: relative;
+	margin: 170px auto;
+	position: relative;
+	border: 1px solid #ddd;
+	background-color: #fff;
+}
+.modal .modal-body .close{
+	 color: #fff;
+    padding: 15px;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+}
+.modal .modal-body .cards{
+	border:none;
+	box-shadow: none;
+}
+.modal .modal-footer a{
+	border: none;
+   float: right;
+   margin-right: 20px;
+   background-color: #ff8080;
 }
 
 footer{
@@ -391,6 +442,9 @@ footer #scroll-top{
 		main .admin-action a{
 			font-size: 20px;
 		}
+		.modal .dashboard{
+			border-left:1px solid #ddd;
+		}
 }
 
 /*columns and styles for medium devices */
@@ -453,7 +507,9 @@ footer #scroll-top{
 		main .admin-action a{
 			font-size: 20px;
 		}
-
+		.modal .dashboard{
+			border-left:1px solid #ddd;
+		}
 }
 
 /*columns and styles for large devices */
@@ -477,7 +533,7 @@ footer #scroll-top{
 		.column-lg-5{
 			width: 41.6667%;
 		}
-		.column-sm-6{
+		.column-lg-6{
 			width: 50%;
 		}
 		.column-lg-7{
@@ -516,5 +572,8 @@ footer #scroll-top{
 		}
 		main .admin-action a{
 			font-size: 20px;
+		}
+		.modal .dashboard{
+			border-left:1px solid #ddd;
 		}
 }
