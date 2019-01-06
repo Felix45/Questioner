@@ -85,9 +85,6 @@ div[class*='column-']{
 .divider{
 		border-bottom:1px solid #ddd;
 }
-.block{
-	display: block;
-}
 
 .input{
 		border: 1px solid #ddd;
@@ -148,6 +145,14 @@ header .logo-mobile button{
 .menu li a{
 	color: #009688;
 	padding: 10px;
+}
+.block{
+	display: block;
+}
+.no-box-shadow{
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 
 main{
@@ -221,6 +226,11 @@ main .dashboard{
 main .profile{
 	color: #009688;
 }
+main .profile .admin-menu a{
+	color: #fff;
+	margin-top: 10px;
+	padding: 10px;
+}
 main .profile .fa-stack{
 	color: #009688;
 }
@@ -246,6 +256,7 @@ main .admin-action-type{
     right: 30px;
     border:1px solid #fff;
 }
+
 
 .drawer-menu{
 	width: 100%;
