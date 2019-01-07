@@ -292,7 +292,7 @@ main .admin-action-type{
     right: 30px;
     border:1px solid #fff;
 }
-main .user p{
+main .user p , main .user .meetup-details span{
 	padding: 0px 0px 5px 10px;
 
 }
@@ -300,9 +300,18 @@ main ol{
 	margin: 0 15px 10px 15px;
 }
 main ol li{
- padding: 10px 10px 35px;
+ padding: 10px 10px 30px;
  border-bottom: 1px dotted #ddd;
  list-style-type: upper-roman;
+}
+main ol li ul li{
+ font-size:14px;
+ border:none;
+ color: #000;
+ border-left: 2px solid #ff8080;
+ list-style-type: none;
+ padding: 5px 10px 0;
+ margin-left:20px;
 }
 main ol li p{
 	padding-bottom: 10px 10px 30px;
