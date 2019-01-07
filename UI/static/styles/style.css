@@ -300,12 +300,12 @@ main ol{
 	margin: 0 15px 10px 15px;
 }
 main ol li{
- padding: 10px;
+ padding: 10px 10px 35px;
  border-bottom: 1px dotted #ddd;
  list-style-type: upper-roman;
 }
 main ol li p{
-	padding-bottom: 10px;
+	padding-bottom: 10px 10px 30px;
 }
 main ol li span{
 	margin-right: 10px;
