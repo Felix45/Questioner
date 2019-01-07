@@ -296,6 +296,25 @@ main .user p{
 	padding: 0px 0px 5px 10px;
 
 }
+main ol{
+	margin: 0 15px 10px 15px;
+}
+main ol li{
+ padding: 10px;
+ border-bottom: 1px dotted #ddd;
+ list-style-type: upper-roman;
+}
+main ol li p{
+	padding-bottom: 10px;
+}
+main ol li span{
+	margin-right: 10px;
+}
+.questions-vote{
+	color: #009688;
+	font-size: 14px;
+
+}
 
 
 .drawer-menu{
@@ -616,3 +635,5 @@ footer #scroll-top{
 			border-left:1px solid #ddd;
 		}
 }
+
+
