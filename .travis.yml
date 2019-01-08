@@ -2,7 +2,7 @@ language: python
 python:
       - 2.7
       - 3.6
-intstall:
-      - pip install > requirementas.txt
+install:
+      - pip install > requirements.txt
 script:
-        pytest
+      - pytest
