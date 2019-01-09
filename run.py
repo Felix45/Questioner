@@ -1,11 +1,7 @@
-""" Adds a flask application """
-from flask import Flask , request , jsonify
+""" run the flask application """
+from app import create_app
 
-app = Flask(__name__)
-
-@app.route("/")
-def get():
-    return "hello, World"
+app = create_app()
 
 if __name__ == "__main__":
     app.run(debug=True)
