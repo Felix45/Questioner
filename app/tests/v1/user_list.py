@@ -1,5 +1,3 @@
-user_0 = {}
-
 user_1 = {
     "firstname": "Felix",
 	"lastname" : "Ouma",
