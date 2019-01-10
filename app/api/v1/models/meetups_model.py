@@ -38,3 +38,8 @@ class MeetUpsModel():
         return jsonify({"msg":"user was added","data":self.meetups , "status":200})
 
 
+    def get_meetups(self):
+        if len(self.meetups) == 0:
+            return jsonify({"msg":"no users were found","data":self.meetups , "status":200})
+
+        return jsonify({"msg":"users","data":self.meetups , "status":200})
