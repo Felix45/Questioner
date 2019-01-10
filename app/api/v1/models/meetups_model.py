@@ -35,6 +35,6 @@ class MeetUpsModel():
 
         self.meetups.append(user)
 
-        return jsonify({"msg":"user was added","data":self.meetups})
+        return jsonify({"msg":"user was added","data":self.meetups , "status":200})
 
 
