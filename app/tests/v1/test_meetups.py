@@ -70,3 +70,40 @@ class MeetupTest(SetUpTestClient):
         res = self.client.get("/api/v1/meetups/upcoming")
         self.assertEqual(res.status_code,200)
 
+
+    def test_view_specific_meetup(self):
+        """ Gets a specific meetup record """
+        meetup = {
+                "location" : "Eldoret",
+                "images"   : ["run.png" , "marathon.jpg" , "cross.png"],
+                "topic"    : "Athletes",
+                "happeningOn" : datetime.datetime(2019, 5, 17),
+                "Tags"         : ["sports","IAAF","AK"]
+        }
+
+        meetup_one = {
+                "location" : "Kileleshwa",
+                "images"   : ["lawyers.png" , "doctors.jpg" , "teachers.png"],
+                "topic"    : "Career Talk",
+                "happeningOn" : datetime.datetime(2019, 5, 17),
+                "Tags"         : ["law","medicine","Education"]
+        }
+        res = self.client.post("/api/v1/meetups",json=meetup,content_type='application/json')
+        self.assertEqual(res.status_code,200)
+        res = self.client.post("/api/v1/meetups",json=meetup_one,content_type='application/json')
+        self.assertEqual(res.status_code,200)
+
+        res = self.client.get("/api/v1/meetups/1")
+        self.assertEqual(res.status_code,200)
+
+        res = self.client.get("/api/v1/meetups/2")
+        self.assertEqual(res.status_code,200)
+
+        res = self.client.get("/api/v1/meetups/50")
+        self.assertEqual(res.status_code,404)
+        self.assertIn('user was not found',res.data)
+
+
+
+    
+
