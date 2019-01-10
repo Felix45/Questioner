@@ -35,37 +35,38 @@ class MeetupTest(SetUpTestClient):
         self.assertEqual(res.status_code,400)
         self.assertIn('sent an empty request',res.data)
 
-        def test_get_all_meetups():
-            meetup = {
-                    "location" : "Eldoret",
-                    "images"   : ["run.png" , "marathon.jpg" , "cross.png"],
-                    "topic"    : "Athletes",
-                    "happeningOn" : datetime.datetime(2019, 5, 17),
-                    "Tags"         : ["sports","IAAF","AK"]
-            }
+    def test_get_all_meetups(self):
+        """ Return all upcoming meetups """
+        meetup = {
+                "location" : "Eldoret",
+                "images"   : ["run.png" , "marathon.jpg" , "cross.png"],
+                "topic"    : "Athletes",
+                "happeningOn" : datetime.datetime(2019, 5, 17),
+                "Tags"         : ["sports","IAAF","AK"]
+        }
 
-            meetup_one = {
-                    "location" : "Kileleshwa",
-                    "images"   : ["lawyers.png" , "doctors.jpg" , "teachers.png"],
-                    "topic"    : "Career Talk",
-                    "happeningOn" : datetime.datetime(2019, 5, 17),
-                    "Tags"         : ["law","medicine","Education"]
-            }
+        meetup_one = {
+                "location" : "",
+                "images"   : ["lawyers.png" , "doctors.jpg" , "teachers.png"],
+                "topic"    : "Career Talk",
+                "happeningOn" : datetime.datetime(2019, 5, 17),
+                "Tags"         : ["law","medicine","Education"]
+        }
 
-            meetup_two = {
-                    "location" : "IHUB",
-                    "images"   : ["coders.png" , "developers.jpg" , "facebook.png"],
-                    "topic"    : "Women in tech",
-                    "happeningOn" : datetime.datetime(2019, 5, 17),
-                    "Tags"         : ["women","mums","ladies"]
-            }
-            res = self.client.post("/api/v1/meetups",json=meetup,content_type='application/json')
-            self.assertEqual(res.status_code,200)
-            res = self.client.post("/api/v1/meetups",json=meetup_one,content_type='application/json')
-            self.assertEqual(res.status_code,200)
-            res = self.client.post("/api/v1/meetups",json=meetup_two,content_type='application/json')
-            self.assertEqual(res.status_code,200)
+        meetup_two = {
+                "location" : "IHUB",
+                "images"   : ["coders.png" , "developers.jpg" , "facebook.png"],
+                "topic"    : "Women in tech",
+                "happeningOn" : datetime.datetime(2019, 5, 17),
+                "Tags"         : ["women","mums","ladies"]
+        }
+        res = self.client.post("/api/v1/meetups",json=meetup,content_type='application/json')
+        self.assertEqual(res.status_code,200)
+        res = self.client.post("/api/v1/meetups",json=meetup_one,content_type='application/json')
+        self.assertEqual(res.status_code,400)
+        res = self.client.post("/api/v1/meetups",json=meetup_two,content_type='application/json')
+        self.assertEqual(res.status_code,200)
 
-            res = self.client.get("/api/v1/meetups/upcoming")
-            self.assertEqual(res.status_code,200)
+        res = self.client.get("/api/v1/meetups/upcoming")
+        self.assertEqual(res.status_code,200)
 
