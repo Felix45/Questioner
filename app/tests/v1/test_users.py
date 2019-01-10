@@ -13,20 +13,20 @@ class UsersModelTest(SetUpTestClient):
 
 			res = self.client.post("/api/v1/users/add/", json=user_1, content_type='application/json')
 			self.assertEqual(res.status_code, 400)
-			self.assertIn('sent an empty request', res.data)
+			self.assertIn('sent an empty request', str(res.data))
 
 		def test_blank_values(self):
 			""" Tests blank field values """
 			res = self.client.post("/api/v1/users/add/", json=user_2, content_type='application/json')
 			self.assertEqual(res.status_code, 400)
-			self.assertIn('Field value was empty:', res.data)
+			self.assertIn('Field value was empty:', str(res.data))
 
 		def test_is_available(self):
 		
 			self.client.post("/api/v1/users/add/", json=user_4, content_type='application/json')
 			res = self.client.post("/api/v1/users/add/", json=user_5, content_type='application/json')
 			self.assertEqual(res.status_code, 409)
-			self.assertIn('username field value is not available:', res.data)
+			self.assertIn('username field value is not available:', str(res.data))
 			
 		def test_is_valid_password(self):
 			res = self.client.post("/api/v1/users/add/", json=user_10, content_type='application/json')
@@ -39,3 +39,4 @@ class UsersModelTest(SetUpTestClient):
 		def test_add_user(self):
 				res = self.client.post("/api/v1/users/add/", json=user_1, content_type='application/json')
 				self.assertEqual(res.status_code, 400)
+				
