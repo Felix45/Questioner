@@ -13,3 +13,7 @@ def add_meetup():
 @meetupV1.route('/meetups/upcoming', methods=['GET'])
 def get_meetup():
 	return meetups_model.get_meetups()
+
+@meetupV1.route('/meetups/upcoming/<meetup_id>', methods=['GET'])
+def get_a_meetup(meetup_id):
+	return meetups_model.get_meetup(meetup_id)
