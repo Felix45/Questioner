@@ -1,5 +1,5 @@
 ''' Sets up the test client '''
-import unittest 
+import unittest
 from app import create_app
 
 
