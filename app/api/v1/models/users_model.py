@@ -47,7 +47,7 @@ class UsersModel:
             return ret[1] , 409
 
         validator = helpers.is_valid_email(email)
-        print validator
+        
 			
         if not validator[0]:
 			return validator[1] , 400
