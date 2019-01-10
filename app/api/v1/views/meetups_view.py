@@ -9,3 +9,7 @@ meetups_model = MeetUpsModel()
 @meetupV1.route('/meetups', methods=['POST'])
 def add_meetup():
 	return meetups_model.add_meetup(request)
+
+@meetupV1.route('/meetups/upcoming', methods=['GET'])
+def get_meetup():
+	return meetups_model.get_meetup(request)
