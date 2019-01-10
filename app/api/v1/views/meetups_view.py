@@ -12,4 +12,4 @@ def add_meetup():
 
 @meetupV1.route('/meetups/upcoming', methods=['GET'])
 def get_meetup():
-	return meetups_model.get_meetup(request)
+	return meetups_model.get_meetups()
