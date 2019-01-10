@@ -37,25 +37,25 @@ class MeetupTest(SetUpTestClient):
 
         def test_get_all_meetups():
             meetup = {
-                    "location" : "Kileleshwa",
-                    "images"   : ["hello.png" , "wazito.jpg" , "babayao.png"],
-                    "topic"    : "Kilimani Mums",
+                    "location" : "Eldoret",
+                    "images"   : ["run.png" , "marathon.jpg" , "cross.png"],
+                    "topic"    : "Athletes",
                     "happeningOn" : datetime.datetime(2019, 5, 17),
-                    "Tags"         : ["women","mums","ladies"]
+                    "Tags"         : ["sports","IAAF","AK"]
             }
 
             meetup_one = {
                     "location" : "Kileleshwa",
-                    "images"   : ["hello.png" , "wazito.jpg" , "babayao.png"],
-                    "topic"    : "Kilimani Mums",
+                    "images"   : ["lawyers.png" , "doctors.jpg" , "teachers.png"],
+                    "topic"    : "Career Talk",
                     "happeningOn" : datetime.datetime(2019, 5, 17),
-                    "Tags"         : ["women","mums","ladies"]
+                    "Tags"         : ["law","medicine","Education"]
             }
 
             meetup_two = {
-                    "location" : "Kileleshwa",
-                    "images"   : ["hello.png" , "wazito.jpg" , "babayao.png"],
-                    "topic"    : "Kilimani Mums",
+                    "location" : "IHUB",
+                    "images"   : ["coders.png" , "developers.jpg" , "facebook.png"],
+                    "topic"    : "Women in tech",
                     "happeningOn" : datetime.datetime(2019, 5, 17),
                     "Tags"         : ["women","mums","ladies"]
             }
@@ -66,6 +66,6 @@ class MeetupTest(SetUpTestClient):
             res = self.client.post("/api/v1/meetups",json=meetup_two,content_type='application/json')
             self.assertEqual(res.status_code,200)
 
-            res = self.client.get("/api/v1/meetups/upcoming",json=meetup,content_type='application/json')
+            res = self.client.get("/api/v1/meetups/upcoming")
             self.assertEqual(res.status_code,200)
 
