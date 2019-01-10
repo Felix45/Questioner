@@ -99,8 +99,9 @@ class MeetupTest(SetUpTestClient):
         res = self.client.get("/api/v1/meetups/2")
         self.assertEqual(res.status_code,200)
 
-        res = self.client.get("/api/v1/meetups/3")
+        res = self.client.get("/api/v1/meetups/50")
         self.assertEqual(res.status_code,404)
+        self.assertIn('user was not found',res.data)
 
 
 
