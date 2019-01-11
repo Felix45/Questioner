@@ -32,7 +32,7 @@ class UsersModelTest(SetUpTestClient):
 			res = self.client.post("/api/v1/users/add/", json=user_10, content_type='application/json')
 			self.assertEqual(res.status_code, 400)
 
-			self.assertIn('Confirm password provided did not match password', str(res.data)
+			self.assertIn('Confirm password provided did not match password', str(res.data))
 			res = self.client.post("/api/v1/users/add/", json=user_11, content_type='application/json')
 			self.assertEqual(res.status_code, 200)
 
