@@ -1,5 +1,7 @@
 # Questioner API 
 
+[![Build Status](https://travis-ci.com/Felix45/Questioner.svg?branch=develop)](https://travis-ci.com/Felix45/Questioner)  [![Coverage Status](https://coveralls.io/repos/github/Felix45/Questioner/badge.svg)](https://coveralls.io/github/Felix45/Questioner) [![Maintainability](https://api.codeclimate.com/v1/badges/44a4b09649ce8ea64657/maintainability)](https://codeclimate.com/github/Felix45/Questioner/maintainability)
+
 Questioner API provides endpoints for the [Questioner application](https://github.com/felix45/Questioner) to help meetup organizers prioritize questions to be answered. 
 
 ## Required Features
@@ -18,14 +20,14 @@ Questioner API provides endpoints for the [Questioner application](https://githu
 
 | Method | Endpoint | functionality |
 |--------|----------|----------|
-|  POST  | /api/v1/auth/register     |   Create a user account       |
-|  POST  | /api/v1/auth/login     |   Sign in a user       |
-|  POST  | /api/v1/meetups     |   Create a meetup record       |
-|  GET  | /api/v1/meetups/<meetupid>    | Fetch a specific meetup record. |
-|  GET  | /api/v1/meetups/upcoming |   Fetch all upcoming meetup records.       |
-|  POST  | /api/v1/questions     |   Create a question for a specific meetup.       |
-|  PATCH  | /api/v1/questions/<questionid>/upvote    |  Upvote on a specific question record       |
-|  PATCH  | /api/v1/questions/<questionid>/downvote    |  Down vote on a specific question record       |
+|  POST  | `/api/v1/users/add `    |   Create a user account       |
+|  POST  | `/api/v1/users/login`     |   Sign in a user       |
+|  POST  | `/api/v1/meetups`     |   Create a meetup record       |
+|  GET  | `/api/v1/meetups/<meetupid> `   | Fetch a specific meetup record. |
+|  GET  | `/api/v1/meetups/upcoming` |   Fetch all upcoming meetup records.       |
+|  POST  | `/api/v1/questions `    |   Create a question for a specific meetup.       |
+|  PATCH  | `/api/v1/questions/<questionid>/upvote`    |  Upvote on a specific question record       |
+|  PATCH  | `/api/v1/questions/<questionid>/downvote `   |  Down vote on a specific question record       |
 
 ## Installation
 
@@ -62,10 +64,17 @@ Install python on your computer
 
 ## Tests
 
-- To see the tests you have to use the terminal in a virtual environment
-  ``` $ pytest```
+ To run the tests you have to use the terminal in a virtual environment
+- To view running of all tests
+```
+$ cd app/tests/v1     
+$ pytest
+```
+- To view the coverage of all tests
+```
+$ pytest --cov app
+```
 
-   
 ## Author 
 
 Felix Ouma
