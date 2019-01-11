@@ -103,3 +103,15 @@ class MeetupTest(SetUpTestClient):
         res = self.client.get("/api/v1/meetups/50")
         self.assertEqual(res.status_code, 404)
         self.assertIn('user was not found', str(res.data))
+
+    def test_add_questions(self):
+        question = {
+
+            "user": 1,
+            "meetup": 1,
+            "title": "How do i install python in Ubuntu 18.04?",
+            "body": "I have been trying to install python in ubuntu 18.04 with no success, someone help please."
+        }
+        res = self.client.post("/api/v1/questions", json=question, content_type='application/json')
+        self.assertEqual(res.status_code, 201)
+        self.assertIn('question was added', str(res.data))
