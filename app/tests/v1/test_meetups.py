@@ -132,9 +132,9 @@ class MeetupTest(SetUpTestClient):
         res = self.client.patch("/api/v1/questions/1/upvote", json=question,
                                 content_type="application/json")
         self.assertEqual(res.status_code, 201)
-        ''''self.assertIn("upvote was successful", str(res.data))
+        self.assertIn("upvote was successful", str(res.data))
 
         res = self.client.patch("/api/v1/questions/1/downvote", json=question,
                                 content_type="application/json")
         self.assertEqual(res.status_code, 201)
-        self.assertIn("downvote was successful", str(res.data))'''
+        self.assertIn("downvote was successful", str(res.data))
