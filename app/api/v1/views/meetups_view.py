@@ -27,10 +27,11 @@ def add_question():
 	return meetups_model.add_a_question(request)
 
 
-@meetupV1.route("/questions/<int:question_id>/upvote")
-def up_vote():
-	return meetups_model.vote(question_id)
+@meetupV1.route("/questions/<int:question_id>/upvote", methods=['PATCH'])
+def up_vote(question_id):
+	return meetups_model.vote(vote=1, question_id=question_id, type="upvote")
 
-@meetupV1.route("/questions/<int:question_id>/upvote")
-def down_vote():
-	return meetups_model.vote(question_id)
+
+@meetupV1.route("/questions/<int:question_id>/downvote", methods=['PATCH'])
+def down_vote(question_id):
+	return meetups_model.vote(vote=-1, question_id=question_id, type="downvote")
