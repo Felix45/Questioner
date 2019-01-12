@@ -118,6 +118,7 @@ class MeetupTest(SetUpTestClient):
         self.assertIn('question was added', str(res.data))
 
     def test_vote_question(self):
+        """ Allows user to upVote or downVote on a question """
         question = {
             "meetup": 1,
             "title": "How do i install python in Ubuntu 18.04?",
