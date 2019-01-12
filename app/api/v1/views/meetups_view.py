@@ -20,3 +20,8 @@ def get_meetup():
 @meetupV1.route('/meetups/<int:meetup_id>', methods=['GET'])
 def get_a_meetup(meetup_id):
 	return meetups_model.get_a_meetup(meetup_id)
+
+
+@meetupV1.route('/questions', methods=['POST'])
+def add_question():
+    return meetups_model.add_a_question(request)
