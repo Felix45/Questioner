@@ -24,4 +24,13 @@ def get_a_meetup(meetup_id):
 
 @meetupV1.route('/questions', methods=['POST'])
 def add_question():
-    return meetups_model.add_a_question(request)
+	return meetups_model.add_a_question(request)
+
+
+@meetupV1.route("/questions/<int:question_id>/upvote")
+def up_vote():
+	return meetups_model.vote(question_id)
+
+@meetupV1.route("/questions/<int:question_id>/upvote")
+def down_vote():
+	return meetups_model.vote(question_id)
