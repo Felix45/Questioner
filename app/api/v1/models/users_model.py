@@ -61,7 +61,6 @@ class UsersModel:
 
         users.append(new_user)
 
-
     def get_users(self):
         """ A list containing all users """
         global users
