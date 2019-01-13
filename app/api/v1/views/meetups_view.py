@@ -35,3 +35,8 @@ def up_vote(question_id):
 @meetupV1.route("/questions/<int:question_id>/downvote", methods=['PATCH'])
 def down_vote(question_id):
 	return meetups_model.vote(vote=-1, question_id=question_id, type="downvote")
+
+
+@meetupV1.route("/meetups/<int:meetup_id>/rsvps")
+def rsvp_meetup():
+	return meetups_model.rsvp(request)
