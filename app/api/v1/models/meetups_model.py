@@ -80,11 +80,12 @@ class MeetUpsModel():
     def vote(self, vote, question_id, type):
         """ Allows a user to upvote or downvote a question """
 
-        for question in self.questions:
-            if question["id"] == question_id:
-                question["votes"] = int(question["votes"]) + int(vote)
-                question["votes"] = 0 if question["votes"] < 0 else question["votes"]
-                return jsonify({"msg": "{} was successful".format(type),
-                                "status": 201, "data": self.questions}), 201
+        question = [q for q in self.questions if q["id"] == question_id]
+      
+        if question:
+            question[0]["votes"] = int(question[0]["votes"]) + int(vote)
+            question[0]["votes"] = 0 if question[0]["votes"] < 0 else question[0]["votes"]
+            return jsonify({"msg": "{} was successful".format(type),
+                            "status": 201, "data": self.questions}), 201
 
         return jsonify({"msg": "Question was not found", "status": 404}), 404  
