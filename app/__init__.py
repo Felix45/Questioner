@@ -10,4 +10,8 @@ def create_app():
     app.register_blueprint(userV1, url_prefix='/api/v1')
     app.register_blueprint(meetupV1, url_prefix='/api/v1')
 
+    @app.route("/")
+    def function():
+        return "hello, World"
+
     return app
