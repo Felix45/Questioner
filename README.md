@@ -1,6 +1,6 @@
 # Questioner API 
 
-[![Build Status](https://travis-ci.com/Felix45/Questioner.svg?branch=develop)](https://travis-ci.com/Felix45/Questioner)  [![Coverage Status](https://coveralls.io/repos/github/Felix45/Questioner/badge.svg)](https://coveralls.io/github/Felix45/Questioner) [![Maintainability](https://api.codeclimate.com/v1/badges/44a4b09649ce8ea64657/maintainability)](https://codeclimate.com/github/Felix45/Questioner/maintainability)
+[![Build Status](https://travis-ci.com/Felix45/Questioner.svg?branch=develop)](https://travis-ci.com/Felix45/Questioner)  [![Coverage Status](https://coveralls.io/repos/github/Felix45/Questioner/badge.svg?branch=bg-fix-invalid-syntax-163140277)](https://coveralls.io/github/Felix45/Questioner?branch=bg-fix-invalid-syntax-163140277) [![Maintainability](https://api.codeclimate.com/v1/badges/44a4b09649ce8ea64657/maintainability)](https://codeclimate.com/github/Felix45/Questioner/maintainability)
 
 Questioner API provides endpoints for the [Questioner application](https://github.com/felix45/Questioner) to help meetup organizers prioritize questions to be answered. 
 
