@@ -47,11 +47,10 @@ class MeetUpsModel():
         """ Returns a specific meetup record """
 
         if len(self.meetups) == 0:
-            return jsonify({"msg": "no users were found", "data": self.meetups, "status": 200}), 200
-        else:
-            for meetup in self.meetups:
-                if meetup['id'] == search_id:
-                    return jsonify({"msg": "user was found", "data": meetup, "status": 200})     
+            return jsonify({"msg": "no users were found", "data": self.meetups, "status": 200}), 200      
+        for meetup in self.meetups:
+            if meetup['id'] == search_id:
+                return jsonify({"msg": "user was found", "data": meetup, "status": 200})     
         return jsonify({"msg": "user was not found", "data": [], "status": 404}), 404
 
     def add_a_question(self, user_request):
@@ -80,18 +79,12 @@ class MeetUpsModel():
 
     def vote(self, vote, question_id, type):
         """ Allows a user to upvote or downvote a question """
-        found = False
 
         for question in self.questions:
             if question["id"] == question_id:
-                found = True
                 question["votes"] = int(question["votes"]) + int(vote)
+                question["votes"] = 0 if question["votes"] < 0 else question["votes"]
+                return jsonify({"msg": "{} was successful".format(type),
+                                "status": 201, "data": self.questions}), 201
 
-            if question["votes"] < 0:
-                question["votes"] = 0
-
-        if found:
-            return jsonify({"msg": "{} was successful".format(type), "status":
-                            201, "data": self.questions}), 201
-        else:
-            return jsonify({"msg": "Question was not found", "status": 404}), 404  
+        return jsonify({"msg": "Question was not found", "status": 404}), 404  
