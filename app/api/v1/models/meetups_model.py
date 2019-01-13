@@ -47,11 +47,10 @@ class MeetUpsModel():
         """ Returns a specific meetup record """
 
         if len(self.meetups) == 0:
-            return jsonify({"msg": "no users were found", "data": self.meetups, "status": 200}), 200
-        else:
-            for meetup in self.meetups:
-                if meetup['id'] == search_id:
-                    return jsonify({"msg": "user was found", "data": meetup, "status": 200})     
+            return jsonify({"msg": "no users were found", "data": self.meetups, "status": 200}), 200      
+        for meetup in self.meetups:
+            if meetup['id'] == search_id:
+                return jsonify({"msg": "user was found", "data": meetup, "status": 200})     
         return jsonify({"msg": "user was not found", "data": [], "status": 404}), 404
 
     def add_a_question(self, user_request):
