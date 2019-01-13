@@ -12,8 +12,7 @@ class UsersModel:
     def add_user(self, user_request):
         """ register a user """
         keys_expected = ['firstname', 'lastname', 'othername', 'username', 'email', 'isAdmin', 'password', 'cpassword', 'phoneNumber']
-        new_user = {}
-
+        
         ret = helpers.is_valid_user_request(keys_expected, user_request)
 
         if ret[0] == 0:
@@ -24,47 +23,44 @@ class UsersModel:
         if ret[0] == 0:
             return ret[1], 400
 
-        user_id = len(users)+1
-        first_name = user_request.get_json()['firstname']
-        lastname = user_request.get_json()['lastname']
-        othername = user_request.get_json()['othername']
-        username = user_request.get_json()['username']
-        email = user_request.get_json()['email']
-        isAdmin = user_request.get_json()['isAdmin']
-        password = user_request.get_json()['password']
-        cpassword = user_request.get_json()['cpassword']
-        phoneNumber = user_request.get_json()['phoneNumber']
-
-        ret = helpers.is_available(email, 'email', users, user_id=0)
+        ret = helpers.is_available(user_request.get_json()['email'], 'email',
+                                   users, user_id=0)
         if ret[0] == 0:
             return ret[1], 409
 
-        ret = helpers.is_available(username, 'username', users, user_id=0)
+        ret = helpers.is_available(user_request.get_json()['username'],
+                                   'username', users, user_id=0)
         if ret[0] == 0:
             return ret[1], 409
 
-        validator = helpers.is_valid_email(email)    
+        validator = helpers.is_valid_email(user_request.get_json()['email'])  
         if not validator[0]:
             return validator[1], 400
 
-        ret = helpers.is_valid_password(password, cpassword)
+        ret = helpers.is_valid_password(user_request.get_json()['password'],
+                                        user_request.get_json()['cpassword'])
         if ret[0] == 0:
             return ret[1], 400
 
-        new_user['user_id'] = user_id
-        new_user['firstname'] = first_name
-        new_user['lastname'] = lastname
-        new_user['othername'] = othername
-        new_user['username'] = username
-        new_user['email'] = email
-        new_user['password'] = password
+        self.insert_db(user_request)     
+        return jsonify({'msg': 'user added successfully'}), 200
+
+    def insert_db(self, user_request):
+        new_user = {}
+
+        new_user['user_id'] = len(users)+1
+        new_user['firstname'] = user_request.get_json()['firstname']
+        new_user['lastname'] = user_request.get_json()['lastname']
+        new_user['othername'] = user_request.get_json()['othername']
+        new_user['username'] = user_request.get_json()['username']
+        new_user['email'] = user_request.get_json()['email']
+        new_user['password'] = user_request.get_json()['password']
         new_user['registered'] = date.today()
-        new_user['isAdmin'] = isAdmin
-        new_user['phoneNumber'] = phoneNumber
+        new_user['isAdmin'] = user_request.get_json()['isAdmin']
+        new_user['phoneNumber'] = user_request.get_json()['phoneNumber']
 
         users.append(new_user)
 
-        return jsonify({'msg': 'user added successfully'}), 200
 
     def get_users(self):
         """ A list containing all users """
