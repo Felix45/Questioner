@@ -350,7 +350,30 @@ main ol li span{
 	color: #009688;
 	display: block;
 }
+.pagination {
 
+
+}
+.pagination li{
+	width:30px;
+	height:30px;
+	color:#009688;
+	display: inline-block;
+	border-bottom:none;
+	background-color: #fff;
+	border: 1px solid #009688;
+}
+.pagination li a{
+	color: #009688;
+
+}
+.pagination .active{
+	
+	background-color: #009688;
+}
+.pagination .active a{
+	color: #fff;
+}
 .modal{
 	width: 100%;
 	height: 100%;
@@ -394,6 +417,7 @@ main ol li span{
 footer{
 	color: #fff;
 	margin: 0;
+	margin-top:30px;
 	padding:30px;
 	position: relative;
 	background-color: #009688;
@@ -644,5 +668,3 @@ footer #scroll-top{
 			border-left:1px solid #ddd;
 		}
 }
-
-
