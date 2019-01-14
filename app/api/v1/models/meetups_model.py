@@ -9,6 +9,7 @@ class MeetUpsModel():
     def __init__(self):
         self.meetups = []
         self.questions = []
+        self.rsvps = []
         self.helpers = UsersHelper()
 
     def add_meetup(self, user_request):
@@ -89,3 +90,19 @@ class MeetUpsModel():
                             "status": 201, "data": self.questions}), 201
 
         return jsonify({"msg": "Question was not found", "status": 404}), 404  
+
+    def rsvp_meetup(self, meetup_id, request):
+        """ Allows a user to rsvp a meetup """
+        rsvp = {}
+        
+        meetup = [m for m in self.meetups if m["id"] == meetup_id]
+
+        if meetup:
+            rsvp["id"] = len(self.rsvps) + 1
+            rsvp["meetup"] = meetup_id
+            rsvp["user"] = request.get_json()["user"]
+            rsvp["response"] = request.get_json()["response"]
+            self.rsvps.append(rsvp)
+            return jsonify({"msg": "rsvp was created", "data": rsvp, "status": 201}), 201
+
+        return jsonify({"msg": "Meetup was not found", "status": 404}), 404  
