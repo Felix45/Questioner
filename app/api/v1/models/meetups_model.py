@@ -94,7 +94,18 @@ class MeetUpsModel():
     def rsvp_meetup(self, meetup_id, request):
         """ Allows a user to rsvp a meetup """
         rsvp = {}
-        
+        keys_expected = ["user", "meetup", "response"]
+
+        ret = self.helpers.is_valid_user_request(keys_expected, request)
+
+        if ret[0] == 0:
+            return ret[1], 400
+
+        ret = self.helpers.is_blank_field(request)
+
+        if ret[0] == 0:
+            return ret[1], 400
+
         meetup = [m for m in self.meetups if m["id"] == meetup_id]
 
         if meetup:
