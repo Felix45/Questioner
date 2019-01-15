@@ -117,3 +117,13 @@ class MeetUpsModel():
             return jsonify({"msg": "rsvp was created", "data": rsvp, "status": 201}), 201
 
         return jsonify({"msg": "Meetup was not found", "status": 404}), 404  
+
+    def get_a_question(self, search_id):
+        """ Returns a specific question record """
+
+        if len(self.questions) == 0:
+            return jsonify({"msg": "no questions were found", "data": self.questions, "status": 200}), 200      
+        for question in self.questions:
+            if question['id'] == search_id:
+                return jsonify({"msg": "question was found", "data": question, "status": 200})     
+        return jsonify({"msg": "question was not found", "data": [], "status": 404}), 404
