@@ -95,11 +95,20 @@ user_11 = {
     "cpassword": "Felix45@",
     "password": "Felix45@"
 }
-
+user_login_0 = {
+    "firstname": "Felix",
+    "lastname": "Ouma",
+    "othername": "Okish",
+    "email": "mahawa@gmail.com",
+    "phoneNumber": "0724603328",
+    "username": "mahawa",
+    "isAdmin": "False",
+    "cpassword": "Okish45@",
+    "password": "Okish45@"
+}
 user_login_1 = {}
 user_login_2 = {"username": "", "password": ""}
 user_login_3 = {
-        "username": "Anthony",
-        "email": "anthony@yahoo.com",
-        "password": "Okish45@",
+        "username": "mahawa",
+        "password": "Okish45@"
 }
