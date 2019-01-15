@@ -7,7 +7,7 @@ class UsersModelTest(SetUpTestClient):
 		""" Setup tests for user endpoints """
 		def test_get_users(self):
 			res = self.client.get("/api/v1/users/list/")
-			self.assertEqual(res.status_code, 200)
+			self.assertEqual(res.status_code, 403)
 
 		def test_user_missing_fields(self):
 
