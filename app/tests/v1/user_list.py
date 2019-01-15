@@ -95,3 +95,11 @@ user_11 = {
     "cpassword": "Felix45@",
     "password": "Felix45@"
 }
+
+user_login_1 = {}
+user_login_2 = {"username":"", "password":""}
+user_login_3 = {
+        "username": "Anthony",
+        "email": "anthony@yahoo.com",
+        "password": "Okish45@",
+}
