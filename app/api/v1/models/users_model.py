@@ -80,6 +80,7 @@ class UsersModel:
         @wraps(f)
         def decorated(*args, **kwargs):
             token = request.args.get('token')
+            #return jsonify({'msg': jwt.decode(token, 'Felix45')})
             if not token:
                 return jsonify({'msg': 'need to login to view this'}), 403
             try:
