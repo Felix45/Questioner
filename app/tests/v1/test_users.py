@@ -39,4 +39,17 @@ class UsersModelTest(SetUpTestClient):
 		def test_add_user(self):
 				res = self.client.post("/api/v1/users/add/", json=user_1, content_type='application/json')
 				self.assertEqual(res.status_code, 400)
+
+		def test_user_login(self):
+			self.client.post("/api/v1/users/add/", json=user_login_0, content_type='application/json')
+
+			res = self.client.post("/api/v1/auth/login/", json=user_login_1, content_type='application/json')
+			self.assertEqual(res.status_code, 400)
+			self.assertIn('sent an empty request', str(res.data))
+
+			res = self.client.post("/api/v1/auth/login/", json=user_login_2, content_type='application/json')
+			self.assertEqual(res.status_code, 400)
+
+			res = self.client.post("/api/v1/auth/login/", json=user_login_3, content_type='application/json')
+			self.assertEqual(res.status_code, 200)
 				
