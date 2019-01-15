@@ -79,11 +79,11 @@ class UsersModel:
     def token_required(self, f):
         @wraps(f)
         def decorated(*args, **kwargs):
-            token = request.get_json()['token']
+            token = request.args.get('token')
             if not token:
                 return jsonify({'msg': 'need to login to view this'}), 403
             try:
-                data = token.decode(token, 'Felix45')
+                data = jwt.decode(token, 'Felix45')
             except:
                 return jsonify({'msg': 'You need to login to view this'}), 403
 

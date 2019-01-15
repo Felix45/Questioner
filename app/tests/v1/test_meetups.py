@@ -179,5 +179,28 @@ class MeetupTest(SetUpTestClient):
         res = self.client.post("/api/v1/meetups/50/rsvp", json=rsvp_two,
                                content_type='application/json')
         self.assertEqual(res.status_code, 404)
+
+        def test_get_a_question(self):
+                question = {
+                        "user": 1,
+                        "meetup": 1,
+                        "title": "How do i install python in Ubuntu 18.04?",
+                        "body": "I have been trying to install python in ubuntu\
+                                        18.04 with no success, someone help please."
+                }
+                question_two = {
+                        "user": 1,
+                        "meetup": 1,
+                        "title": "How do i install python in Ubuntu 18.04?",
+                        "body": "I have been trying to install python in ubuntu\
+                                        18.04 with no success, someone help please."
+                }
+                res = self.client.post("/api/v1/questions", json=question,
+                               content_type='application/json')
+                self.assertEqual(res.status_code, 201)
+                res = self.client.post("/api/v1/questions", json=question_two,
+                               content_type='application/json')
+                self.assertEqual(res.status_code, 201)
+
             
 
