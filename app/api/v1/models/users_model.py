@@ -116,5 +116,5 @@ class UsersModel:
                                 "exp": datetime.datetime.utcnow() + datetime.timedelta(30)
                                 }, 'Felix45')
             return jsonify({'msg': 'logged in', "data": logged_in, "token":
-                            token}), 200
+                            token.decode('UTF-8')}), 200
         return jsonify({'msg': 'user {} not found:'.format(username)}), 404
