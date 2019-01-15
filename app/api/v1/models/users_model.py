@@ -1,11 +1,16 @@
 """ Manages users details """
+import jwt
+import datetime
 from datetime import date
+from functools import wraps
+
 from flask import Flask, jsonify, request
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.api.v1.utils.user_validator import UsersHelper
 
 
 users = []
+token = ''
 helpers = UsersHelper()
 
 
@@ -70,9 +75,23 @@ class UsersModel:
         if len(users) == 0:
             return jsonify({'msg': 'no user was found'})    
         return jsonify({"data": users}), 200
+    
+    def token_required(self, f):
+        @wraps(f)
+        def decorated(*args, **kwargs):
+            token = request.get_json()['token']
+            if not token:
+                return jsonify({'msg': 'need to login to view this'}), 403
+            try:
+                data = token.decode(token, 'Felix45')
+            except:
+                return jsonify({'msg': 'You need to login to view this'}), 403
+
+            return f(*args, **kwargs)
+        return decorated
 
     def login_user(self, request):
-        global users
+        global users, token
         keys_expected = ['username', 'password']
 
         validator = helpers.is_valid_user_request(keys_expected, request)
@@ -92,5 +111,9 @@ class UsersModel:
                      check_password_hash(u['password'], password)]
 
         if len(logged_in) > 0:
-            return jsonify({'msg': 'logged in', "data": logged_in}), 200
+            token = jwt.encode({"user": username,
+                                "exp": datetime.datetime.utcnow() + datetime.timedelta(30)
+                                }, 'Felix45')
+            return jsonify({'msg': 'logged in', "data": logged_in, "token":
+                            token}), 200
         return jsonify({'msg': 'user {} not found:'.format(username)}), 404

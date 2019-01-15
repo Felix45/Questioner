@@ -8,6 +8,7 @@ users_model = UsersModel()
 
 
 @userV1.route('/users/list/', methods=['GET'])
+@users_model.token_required
 def get_users():
 	return users_model.get_users()
 
