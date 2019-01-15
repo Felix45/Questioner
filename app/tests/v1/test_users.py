@@ -41,7 +41,7 @@ class UsersModelTest(SetUpTestClient):
 				self.assertEqual(res.status_code, 400)
 
 		def test_user_login(self):
-			self.client.post("/api/v1/users/add/", json=user_login_3,content_type='application/json')
+			self.client.post("/api/v1/users/add/", json=user_login_0, content_type='application/json')
 
 			res = self.client.post("/api/v1/auth/login/", json=user_login_1, content_type='application/json')
 			self.assertEqual(res.status_code, 400)
