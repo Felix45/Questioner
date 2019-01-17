@@ -26,11 +26,11 @@ class MeetupTest(SetUpTestClient):
 
         res = self.client.post("/api/v1/meetups", json=meetup, content_type='application/json')
         self.assertEqual(res.status_code, 200)
-        self.assertIn('user was added', str(res.data))
+        self.assertIn('Meetup was added', str(res.data))
 
         res = self.client.post("/api/v1/meetups", json=meetup_two, content_type='application/json')
         self.assertEqual(res.status_code, 400)
-        self.assertIn('Field value was empty:', str(res.data))
+        self.assertIn('location should be filled', str(res.data))
 
         res = self.client.post("/api/v1/meetups", json=meetup_empty,
                                content_type='application/json')
@@ -102,9 +102,10 @@ class MeetupTest(SetUpTestClient):
 
         res = self.client.get("/api/v1/meetups/50")
         self.assertEqual(res.status_code, 404)
-        self.assertIn('user was not found', str(res.data))
+        self.assertIn('Meetup was not found', str(res.data))
 
     def test_add_questions(self):
+        """ Tests adding a question """
         question = {
 
             "user": 1,
