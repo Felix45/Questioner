@@ -7,14 +7,14 @@ class DatabaseHelper:
         ''' Creates an admin user '''
         self.conn = DbConnection().db_connection()
 
-    def insert_into_db(self, table, columns, values):
+    def insert_into_db(self, table, columns, values, record):
         """ INSERT INTO A TABLE """
         cursor= self.conn.cursor()
         sql = "INSERT INTO {table} ({col}) VALUES ({val})".format(table = table, col = columns, val = values)
         #return jsonify({'msg':sql})
         cursor.execute(sql)
         self.conn.commit()
-        return jsonify({'msg': 'user added successfully'}), 201
+        return jsonify({'msg': '{} added successfully'.format(record)}), 201
         
 
     def find_in_db(self, table , field):

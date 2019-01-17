@@ -49,7 +49,9 @@ class DbConnection:
                                 topic VARCHAR (90) NOT NULL,
                                 happeningOn TIMESTAMP NOT NULL,
                                 location VARCHAR (90) NOT NULL,
-                                created_on TIMESTAMP NOT NULL DEFAULT current_timestamp
+                                created_on TIMESTAMP NOT NULL DEFAULT current_timestamp,
+                                images VARCHAR (200) NULL,
+                                tags VARCHAR(200) NULL
         );"""
 
         TABLE_QUESTIONS = """ 
