@@ -15,7 +15,7 @@ class UsersHelper:
 		
 		for key in keys_expected:
 			if key not in sent_keys:
-				return 0, jsonify({'message': 'missing required field {} from request'.format(key)})
+				return 0, jsonify({'message': 'You must provide a {}'.format(key)})
 
 		return 1	, jsonify({'message': 'user request was valid'})
 		
