@@ -74,7 +74,7 @@ class UsersModel:
         values= "'"+new_user['firstname']+"','"+new_user['lastname']+"','"+new_user['othername']+"','"+new_user['username']+"','"+new_user['email']+"','"+\
                  new_user['password']+"','"+new_user['registered']+"',"+new_user['isadmin']+",'"+new_user['phone_number']+"'"
         
-        return database.insert_into_db('users', columns, values )
+        return database.insert_into_db('users', columns, values , 'user' )
         
 
 
