@@ -34,9 +34,9 @@ class DbConnection:
                                 firstname VARCHAR (40) NOT NULL, 
                                 lastname VARCHAR (40) NOT NULL, 
                                 othername VARCHAR (40),
-                                email VARCHAR (40) NOT NULL, 
+                                email VARCHAR (40) UNIQUE NOT NULL, 
                                 phone_number VARCHAR (40),
-                                username VARCHAR (40) NOT NULL,
+                                username VARCHAR (40) UNIQUE NOT NULL,
                                 registered TIMESTAMP NOT NULL DEFAULT current_timestamp, 
                                 password VARCHAR (256) NOT NULL,
                                 IsAdmin VARCHAR (20) DEFAULT false
@@ -86,13 +86,14 @@ class DbConnection:
                         )
         """
 
-        return [TABLE_USERS,TABLE_MEETUPS,TABLE_QUESTIONS,TABLE_RSVPS,ADMIN_USER]
+        return [TABLE_USERS,TABLE_MEETUPS,TABLE_QUESTIONS,TABLE_RSVPS]
 
     def execute_queries(self):
         curs = self.get_connection().cursor()
-
+        #curs.execute(self.db_clean())
         for query in self.create_database_tables():
             curs.execute(query)
+        
 
     def commit_changes(self):
         """ Commits changes to database """    
@@ -104,9 +105,9 @@ class DbConnection:
         self.db_clean()
 
 
-'''db = DbConnection()
-db.db_connection(DATABASE_URL)
+db = DbConnection()
+db.db_connection()
 db.execute_queries()
-db.commit_changes()'''
+db.commit_changes()
 
         

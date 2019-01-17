@@ -32,13 +32,15 @@ class UsersModel:
 
         if ret[0] == 0:
             return ret[1], 400
-       
-        users = database.find_in_db('users', 'email', user_request.get_json()['email'])
+
+        expression = 'email='+"'"+user_request.get_json()['email']+"'"
+        users = database.find_in_db('users', expression)
          
         if users:
             return jsonify({'message': 'email is already in use '}), 409
-
-        users = database.find_in_db('users', 'username', user_request.get_json()['username'])
+        
+        expression = 'username='+"'"+user_request.get_json()['username']+"'"
+        users = database.find_in_db('users', expression)
 
         if users:
             return jsonify({'message': 'username is already in use '}), 409
@@ -116,13 +118,13 @@ class UsersModel:
         username = request.get_json()['username']
         password = request.get_json()['password']
 
-        logged_in = [u for u in users if u['username'] == username and 
-                     check_password_hash(u['password'], password)]
+        expression = 'username='+"'"+username+"'"
+        users = database.find_in_db('users', expression)
 
-        if len(logged_in) > 0:
+        if users and check_password_hash(users[8], password):
             token = jwt.encode({"user": username,
                                 "exp": datetime.datetime.utcnow() + datetime.timedelta(30)
                                 }, 'Felix45')
-            return jsonify({'msg': 'logged in', "data": logged_in, "token":
-                            token.decode('UTF-8')}), 200
-        return jsonify({'msg': 'user {} not found:'.format(username)}), 404
+            return jsonify({'msg': 'logged in', "data": users, "token":
+                            token.decode('UTF-8'), "status": 200 }), 200
+        return jsonify({'msg': 'user {} not found:'.format(username),"status": 404}), 404

@@ -17,10 +17,10 @@ class DatabaseHelper:
         return jsonify({'msg': 'user added successfully'}), 201
         
 
-    def find_in_db(self, table , field , value="'mwangi@gmail.com'"):
+    def find_in_db(self, table , field):
         """ Find an Item in a database """
         cursor = self.conn.cursor()
-        sql = "SELECT * FROM {table} WHERE {field} = '{value}'".format(table = table, field = field, value=value)
+        sql = "SELECT * FROM {table} WHERE {field} ".format(table = table, field = field)
         cursor.execute(sql)
         row = cursor.fetchone()
         return row
