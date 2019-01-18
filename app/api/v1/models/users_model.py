@@ -50,7 +50,7 @@ class UsersModel:
             return ret[1], 400
 
         self.insert_db(user_request)     
-        return jsonify({'msg': 'user added successfully'}), 200
+        return jsonify({'msg': 'user added successfully', "status": 201}), 201
 
     def insert_db(self, user_request):
         new_user = {}
@@ -74,7 +74,7 @@ class UsersModel:
 
         if len(users) == 0:
             return jsonify({'msg': 'no user was found'})    
-        return jsonify({"data": users}), 200
+        return jsonify({"data": users, "status": 200}), 200
     
     def token_required(self, f):
         @wraps(f)
@@ -82,11 +82,11 @@ class UsersModel:
             token = request.args.get('token') or request.get_json()['token']
             #return jsonify({'msg': jwt.decode(token, 'Felix45')})
             if not token:
-                return jsonify({'msg': 'need to login to view this'}), 403
+                return jsonify({'msg': 'need to login to view this', "status": 403}), 403
             try:
                 data = jwt.decode(token, 'Felix45')
             except:
-                return jsonify({'msg': 'You need to login to view this'}), 403
+                return jsonify({'msg': 'You need to login to view this', "status": 403}), 403
 
             return f(*args, **kwargs)
         return decorated
@@ -116,5 +116,5 @@ class UsersModel:
                                 "exp": datetime.datetime.utcnow() + datetime.timedelta(30)
                                 }, 'Felix45')
             return jsonify({'msg': 'logged in', "data": logged_in, "token":
-                            token.decode('UTF-8')}), 200
-        return jsonify({'msg': 'user {} not found:'.format(username)}), 404
+                            token.decode('UTF-8') , "status": 200}), 200
+        return jsonify({'msg': 'user {} not found:'.format(username), "status": 404}), 404

@@ -37,22 +37,22 @@ class MeetUpsModel():
 
         self.meetups.append(user)
 
-        return jsonify({"msg": "user was added", "data": self.meetups, "status": 200})
+        return jsonify({"msg": "Meetup was added", "data": self.meetups, "status": 201})
 
     def get_meetups(self):
         if len(self.meetups) == 0:
-            return jsonify({"msg": "no users were found", "data": self.meetups, "status": 200})
-        return jsonify({"msg": "users", "data": self.meetups, "status": 200})
+            return jsonify({"msg": "no meetups were found", "data": self.meetups, "status": 200})
+        return jsonify({"msg": "meetups", "data": self.meetups, "status": 200})
 
     def get_a_meetup(self, search_id):
         """ Returns a specific meetup record """
 
         if len(self.meetups) == 0:
-            return jsonify({"msg": "no users were found", "data": self.meetups, "status": 200}), 200      
+            return jsonify({"msg": "no meetups were found", "data": self.meetups, "status": 200}), 200      
         for meetup in self.meetups:
             if meetup['id'] == search_id:
-                return jsonify({"msg": "user was found", "data": meetup, "status": 200})     
-        return jsonify({"msg": "user was not found", "data": [], "status": 404}), 404
+                return jsonify({"msg": "Meetup was found", "data": meetup, "status": 200})     
+        return jsonify({"msg": "Meetup was not found", "data": [], "status": 404}), 404
 
     def add_a_question(self, user_request):
         """ Add a question record """
@@ -76,7 +76,7 @@ class MeetUpsModel():
         question['body'] = user_request.get_json()['body']
 
         self.questions.append(question)
-        return jsonify({"msg": "question was added", "status": 201}), 201
+        return jsonify({"msg": "question was added", "data": self.questions, "status": 201}), 201
 
     def vote(self, vote, question_id, type):
         """ Allows a user to upvote or downvote a question """
