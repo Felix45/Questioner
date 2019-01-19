@@ -19,6 +19,10 @@ def add_meetup():
 def get_meetup():
 	return meetups_model.get_meetups()
 
+@meetupV2.route('/meetups/delete/<int:meetup_id>', methods=['DELETE'])
+def delete_meetup(meetup_id):
+	return meetups_model.delete_meetup(meetup_id)
+
 
 @meetupV2.route('/meetups/<int:meetup_id>', methods=['GET'])
 def get_a_meetup(meetup_id):
