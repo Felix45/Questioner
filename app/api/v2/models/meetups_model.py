@@ -43,17 +43,17 @@ class MeetUpsModel():
     def get_meetups(self):
         if len(self.meetups) == 0:
             return jsonify({"msg": "no users were found", "data": self.meetups, "status": 200})
-        return jsonify({"msg": "users", "data": self.meetups, "status": 200})
+        return jsonify({"msg": "Meetups were not found", "data": self.meetups, "status": 404})
 
     def get_a_meetup(self, search_id):
         """ Returns a specific meetup record """
-
-        if len(self.meetups) == 0:
-            return jsonify({"msg": "no users were found", "data": self.meetups, "status": 200}), 200      
-        for meetup in self.meetups:
-            if meetup['id'] == search_id:
-                return jsonify({"msg": "user was found", "data": meetup, "status": 200})     
-        return jsonify({"msg": "user was not found", "data": [], "status": 404}), 404
+        expression = "id={0}".format(search_id)
+        meetup = database.find_in_db('meetups', expression)
+        
+        if meetup:
+            return  jsonify({"msg": "Meetup was found", "data": meetup, "status": 200})   
+        return jsonify({"msg": "Meetup was not found", "data": [], "status": 404}), 404
+    
 
     def delete_meetup(self, meetup_id):
         expression = "id={0}".format(meetup_id)

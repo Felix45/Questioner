@@ -1,4 +1,6 @@
 """ Contains helper functions related to database transactions """
+import psycopg2
+from psycopg2.extras import DictCursor
 from flask import jsonify
 from app.dbconnection import DbConnection
 
@@ -19,12 +21,19 @@ class DatabaseHelper:
 
     def find_in_db(self, table , field):
         """ Find an Item in a database """
-        cursor = self.conn.cursor()
+        cursor = self.conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
         sql = "SELECT * FROM {table} WHERE {field} ".format(table=table, field=field)
         cursor.execute(sql)
-        row = cursor.fetchone()
-        return row
+        row = cursor.fetchall()
+        return self.result_in_dict(row)
         
+        
+    def result_in_dict(self, rows):
+        """ Returns a dictionary with results """
+        dict_result = []
+        for row in rows:
+            dict_result.append(dict(row))
+        return dict_result
 
     def update_record(self, table, flag, id ):
         """ Updates a record in a database """
