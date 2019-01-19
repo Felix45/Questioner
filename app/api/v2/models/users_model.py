@@ -55,7 +55,6 @@ class UsersModel:
             return ret[1], 400
         
         return self.insert_db(user_request)    
-        #
 
     def insert_db(self, user_request):
         new_user = {}
