@@ -43,7 +43,7 @@ class MeetUpsModel():
     def get_meetups(self):
         if len(self.meetups) == 0:
             return jsonify({"msg": "no users were found", "data": self.meetups, "status": 200})
-        return jsonify({"msg": "users", "data": self.meetups, "status": 200})
+        return jsonify({"msg": "Meetups were not found", "data": self.meetups, "status": 404})
 
     def get_a_meetup(self, search_id):
         """ Returns a specific meetup record """
