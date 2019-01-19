@@ -38,7 +38,7 @@ class MeetUpsModel():
 
         return database.insert_into_db('meetups', columns, values, 'Meetup')
 
-        #return jsonify({"msg": "meetup was added", "data": self.meetups, "status": 200})
+        #return jsonify({"msg": "meetup was added", "data": meetups, "status": 200})
 
     def get_meetups(self):
         if len(self.meetups) == 0:
@@ -54,6 +54,15 @@ class MeetUpsModel():
             if meetup['id'] == search_id:
                 return jsonify({"msg": "user was found", "data": meetup, "status": 200})     
         return jsonify({"msg": "user was not found", "data": [], "status": 404}), 404
+
+    def delete_meetup(self, meetup_id):
+        expression = "id={0}".format(meetup_id)
+        meetup = database.find_in_db('meetups',expression)
+
+        if meetup:
+            database.delete_record("meetups", "id",meetup_id)
+            return jsonify({"msg":"meetup was deleted", "status":200 }), 200 
+        return jsonify({"msg":"meetup was not found", "status": 404}), 404
 
     def add_a_question(self, user_request):
         """ Add a question record """
