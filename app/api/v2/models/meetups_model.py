@@ -41,8 +41,10 @@ class MeetUpsModel():
         #return jsonify({"msg": "meetup was added", "data": meetups, "status": 200})
 
     def get_meetups(self):
-        if len(self.meetups) == 0:
-            return jsonify({"msg": "no users were found", "data": self.meetups, "status": 200})
+        expression = "happeningon >= '{0}'".format(date.today())
+        self.meetups = database.find_in_db('meetups', expression)
+        if self.meetups:
+            return jsonify({"msg": "Meetups were found", "data": self.meetups, "status": 200})
         return jsonify({"msg": "Meetups were not found", "data": self.meetups, "status": 404})
 
     def get_a_meetup(self, search_id):

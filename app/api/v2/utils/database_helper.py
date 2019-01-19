@@ -51,11 +51,11 @@ class DatabaseHelper:
 
     def fethall_records(self, tbl):
         """ Fetch all records in a database """
-        cursor = self.conn.cursor()
+        cursor = self.conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
         sql = "SELECT * FROM {table} ".format(table=tbl)
         cursor.execute(sql)
         row = cursor.fetchall()
-        return row
+        return self.result_in_dict(row)
 
     def update_columns_record(self, table, flag, key, id ):
         """ Updates a record in a database """
