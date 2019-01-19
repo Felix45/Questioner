@@ -14,13 +14,13 @@ class DatabaseHelper:
         #return jsonify({'msg':sql})
         cursor.execute(sql)
         self.conn.commit()
-        return jsonify({'msg': '{} added successfully'.format(record)}), 201
+        return jsonify({'msg': '{} added successfully'.format(record), 'status':201}), 201
         
 
     def find_in_db(self, table , field):
         """ Find an Item in a database """
         cursor = self.conn.cursor()
-        sql = "SELECT * FROM {table} WHERE {field} ".format(table = table, field = field)
+        sql = "SELECT * FROM {table} WHERE {field} ".format(table=table, field=field)
         cursor.execute(sql)
         row = cursor.fetchone()
         return row
@@ -36,16 +36,16 @@ class DatabaseHelper:
     def delete_record(self, table, field, flag):
         """ Deletes a record from the database """
         cursor = self.conn.cursor()
-        query = "DELETE FROM {table} WHERE {field} = {flag}".format(table, field, flag)
-        print(query)
-        cursor.excute(query)
+        query = "DELETE FROM {table} WHERE {field} = {flag}".format(table=table, field=field, flag=flag)
+        cursor.execute(query)
+        self.conn.commit()
 
     def fethall_records(self, tbl):
         """ Fetch all records in a database """
         cursor = self.conn.cursor()
         sql = "SELECT * FROM {table} ".format(table=tbl)
         cursor.execute(sql)
-        row = cursor.fetchone()
+        row = cursor.fetchall()
         return row
 
     def update_columns_record(self, table, flag, key, id ):
