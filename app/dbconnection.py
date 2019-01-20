@@ -45,7 +45,7 @@ class DbConnection:
         TABLE_MEETUPS = """ 
                             CREATE TABLE IF NOT EXISTS meetups (
                                 Id serial PRIMARY KEY NOT NULL,
-                                user_id INTEGER NOT NULL,
+                                user_id INTEGER NOT NULL REFERENCES users(Id),
                                 topic VARCHAR (90) NOT NULL,
                                 happeningOn TIMESTAMP NOT NULL,
                                 location VARCHAR (90) NOT NULL,
@@ -57,8 +57,8 @@ class DbConnection:
         TABLE_QUESTIONS = """ 
                         CREATE TABLE IF NOT EXISTS questions (
                             Id serial PRIMARY KEY NOT NULL,
-                            meetup_id INTEGER NOT NULL, 
-                            created_by INTEGER NOT NULL, 
+                            meetup_id INTEGER  REFERENCES meetups(Id), 
+                            created_by INTEGER NOT NULL REFERENCES users(Id), 
                             created_on TIMESTAMP NOT NULL DEFAULT current_timestamp,
                             title VARCHAR (150) NOT NULL,
                             body VARCHAR (1000) NOT NULL, 
