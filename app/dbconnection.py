@@ -62,9 +62,8 @@ class DbConnection:
                             created_on TIMESTAMP NOT NULL DEFAULT current_timestamp,
                             title VARCHAR (150) NOT NULL,
                             body VARCHAR (1000) NOT NULL, 
-                            votes INTEGER DEFAULT 0   
-
-                            constraint votes_non_negative check(votes >= 0)             
+                            votes INTEGER DEFAULT 0,   
+                            constraint votes_non_negative check (votes >= 0)             
         );"""
         TABLE_RSVPS = """ 
                         CREATE TABLE IF NOT EXISTS rsvps (
