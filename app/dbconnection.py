@@ -1,15 +1,13 @@
 import os
 import psycopg2
 
-DATABASE_URL="dbname='questioner' host='localhost' user='postgres' password='emily' port='5432'"
-
 
 class DbConnection:
 
     def db_connection(self):
         """ Establishes connection to a database """
         global DATABASE_URL
-        self.conn = psycopg2.connect(DATABASE_URL)
+        self.conn = psycopg2.connect(os.getenv('DATABASE_URL'))
         return self.conn
 
     def get_connection(self):

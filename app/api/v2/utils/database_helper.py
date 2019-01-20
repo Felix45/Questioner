@@ -67,6 +67,8 @@ class DatabaseHelper:
         try:
             cursor.execute(sql)
             self.conn.commit()
+            cursor.close()
         except:
+            self.conn.rollback()
             return jsonify({'msg':'Update was not successful'})   
         return jsonify({'msg':'Update was successful'}) 
