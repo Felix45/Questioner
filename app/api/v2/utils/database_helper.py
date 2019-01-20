@@ -13,8 +13,11 @@ class DatabaseHelper:
         """ INSERT INTO A TABLE """
         cursor= self.conn.cursor()
         sql = "INSERT INTO {table} ({col}) VALUES ({val})".format(table = table, col = columns, val = values)
-        #return jsonify({'msg':sql})
-        cursor.execute(sql)
+        
+        try:
+            cursor.execute(sql)
+        except:
+            return jsonify({'msg': '{} not added successfully'.format(record), 'status':400}), 400
         self.conn.commit()
         return jsonify({'msg': '{} added successfully'.format(record), 'status':201}), 201
         
