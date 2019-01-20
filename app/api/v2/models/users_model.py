@@ -120,7 +120,7 @@ class UsersModel:
         expression = 'username='+"'"+username+"'"
         users = database.find_in_db('users', expression)
 
-        if users and check_password_hash(users[8], password):
+        if users and check_password_hash(users[0]['password'], password):
             token = jwt.encode({"user": username,
                                 "exp": datetime.datetime.utcnow() + datetime.timedelta(30)
                                 }, 'Felix45')
