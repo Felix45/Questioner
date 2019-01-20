@@ -1,15 +1,13 @@
 import os
 import psycopg2
 
-DATABASE_URL="dbname='questioner' host='localhost' user='postgres' password='emily' port='5432'"
-
 
 class DbConnection:
 
     def db_connection(self):
         """ Establishes connection to a database """
         global DATABASE_URL
-        self.conn = psycopg2.connect(DATABASE_URL)
+        self.conn = psycopg2.connect(os.getenv('DATABASE_URL'))
         return self.conn
 
     def get_connection(self):
@@ -62,7 +60,8 @@ class DbConnection:
                             created_on TIMESTAMP NOT NULL DEFAULT current_timestamp,
                             title VARCHAR (150) NOT NULL,
                             body VARCHAR (1000) NOT NULL, 
-                            votes INTEGER DEFAULT 0                
+                            votes INTEGER DEFAULT 0,   
+                            constraint votes_non_negative check (votes >= 0)             
         );"""
         TABLE_RSVPS = """ 
                         CREATE TABLE IF NOT EXISTS rsvps (

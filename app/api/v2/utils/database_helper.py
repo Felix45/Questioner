@@ -63,6 +63,12 @@ class DatabaseHelper:
     def update_columns_record(self, table, flag, key, id ):
         """ Updates a record in a database """
         cursor = self.conn.cursor()
-        query = "UPDATE {table} SET {flag} WHERE {key} = {id}".format(table,flag,key,  id)
-        print(query)
-        cursor.execute(query)
+        sql = "UPDATE {table} SET {flag} WHERE {key} = {id}".format(table=table,flag=flag,key=key,id=id)
+        try:
+            cursor.execute(sql)
+            self.conn.commit()
+            cursor.close()
+        except:
+            self.conn.rollback()
+            return jsonify({'msg':'Update was not successful'})   
+        return jsonify({'msg':'Update was successful'}) 
