@@ -66,22 +66,8 @@ class MeetUpsModel():
             return jsonify({"msg":"meetup was deleted", "status":200 }), 200 
         return jsonify({"msg":"meetup was not found", "status": 404}), 404
 
-
-    def vote(self, vote, question_id, type):
-        """ Allows a user to upvote or downvote a question """
-
-        question = [q for q in self.questions if q["id"] == question_id]
-      
-        if question:
-            question[0]["votes"] = int(question[0]["votes"]) + int(vote)
-            question[0]["votes"] = 0 if question[0]["votes"] < 0 else question[0]["votes"]
-            return jsonify({"msg": "{} was successful".format(type),
-                            "status": 201, "data": self.questions}), 201
-
-        return jsonify({"msg": "Question was not found", "status": 404}), 404  
-
     def rsvp_meetup(self, meetup_id, request):
-        """ Allows a user to rsvp a meetup """
+        """ Allows a user to rsvp a meetup 
         rsvp = {}
         keys_expected = ["user", "meetup", "response"]
 
@@ -105,14 +91,7 @@ class MeetUpsModel():
             self.rsvps.append(rsvp)
             return jsonify({"msg": "rsvp was created", "data": rsvp, "status": 201}), 201
 
-        return jsonify({"msg": "Meetup was not found", "status": 404}), 404  
+        return jsonify({"msg": "Meetup was not found", "status": 404}), 404  """
+        pass
 
-    def get_a_question(self, search_id):
-        """ Returns a specific question record """
-
-        if len(self.questions) == 0:
-            return jsonify({"msg": "no questions were found", "data": self.questions, "status": 200}), 200      
-        for question in self.questions:
-            if question['id'] == search_id:
-                return jsonify({"msg": "question was found", "data": question, "status": 200})     
-        return jsonify({"msg": "question was not found", "data": [], "status": 404}), 404
+    
