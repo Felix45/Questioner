@@ -6,7 +6,6 @@ class DbConnection:
 
     def db_connection(self):
         """ Establishes connection to a database """
-        global DATABASE_URL
         self.conn = psycopg2.connect(os.getenv('DATABASE_URL'))
         return self.conn
 
@@ -87,28 +86,26 @@ class DbConnection:
                         )
         """
 
-        return [TABLE_USERS,TABLE_MEETUPS,TABLE_QUESTIONS,TABLE_RSVPS]
+        return [TABLE_USERS, TABLE_MEETUPS, TABLE_QUESTIONS, TABLE_RSVPS], ADMIN_USER
 
     def execute_queries(self):
         curs = self.get_connection().cursor()
-        #curs.execute(self.db_clean())
-        for query in self.create_database_tables():
+        '''curs.execute(self.db_clean())'''
+        for query in self.create_database_tables()[0]:
             curs.execute(query)
         
-
     def commit_changes(self):
-        """ Commits changes to database """    
+        """ Commits changes to database """
         self.get_connection().commit()
 
     def setUpTestDb(self):
         """ Sets up a test database """
         self.execute_queries()
-        self.db_clean()
+        self.get_connection().commit()
 
-
-db = DbConnection()
-db.db_connection()
-db.execute_queries()
-db.commit_changes()
-
-        
+    def destroyTestDb(self):
+        """ Drop tables in test database """
+        curs = self.get_connection().cursor()
+        curs.execute(self.db_clean())
+        curs.execute(self.create_database_tables()[0])
+        self.get_connection().commit()
