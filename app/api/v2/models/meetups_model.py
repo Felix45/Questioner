@@ -53,21 +53,20 @@ class MeetUpsModel():
         meetup = database.find_in_db('meetups', expression)
         
         if meetup:
-            return  jsonify({"msg": "Meetup was found", "data": meetup, "status": 200})   
+            return jsonify({"msg": "Meetup was found", "data": meetup, "status": 200})   
         return jsonify({"msg": "Meetup was not found", "data": [], "status": 404}), 404
     
-
     def delete_meetup(self, meetup_id):
         expression = "id={0}".format(meetup_id)
-        meetup = database.find_in_db('meetups',expression)
+        meetup = database.find_in_db('meetups', expression)
 
         if meetup:
-            database.delete_record("meetups", "id",meetup_id)
-            return jsonify({"msg":"meetup was deleted", "status":200 }), 200 
-        return jsonify({"msg":"meetup was not found", "status": 404}), 404
+            database.delete_record("meetups", "id", meetup_id)
+            return jsonify({"msg": "meetup was deleted", "status": 200 }), 200 
+        return jsonify({"msg": "meetup was not found", "status": 404}), 404
 
     def rsvp_meetup(self, meetup_id, request):
-        """ Allows a user to rsvp a meetup 
+        Allows a user to rsvp a meetup 
         rsvp = {}
         keys_expected = ["user", "meetup", "response"]
 
@@ -91,7 +90,4 @@ class MeetUpsModel():
             self.rsvps.append(rsvp)
             return jsonify({"msg": "rsvp was created", "data": rsvp, "status": 201}), 201
 
-        return jsonify({"msg": "Meetup was not found", "status": 404}), 404  """
-        pass
-
-    
+        return jsonify({"msg": "Meetup was not found", "status": 404}), 404
