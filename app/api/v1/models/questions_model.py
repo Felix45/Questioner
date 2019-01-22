@@ -15,15 +15,15 @@ class QuestionsModel():
         question = {}
         keys_expected = ["user", "meetup", "title", "body"]
 
-        ret = self.helpers.is_valid_user_request(keys_expected, user_request)
+        result = self.helpers.is_valid_user_request(keys_expected, user_request)
 
-        if ret[0] == 0:
-            return ret[1], 400
+        if result[0] == 0:
+            return result[1], 400
 
-        ret = self.helpers.is_blank_field(user_request)
+        result = self.helpers.is_blank_field(user_request)
 
-        if ret[0] == 0:
-            return ret[1], 400
+        if result[0] == 0:
+            return result[1], 400
         question['id'] = len(self.questions) + 1
         question['votes'] = 0
         question['user'] = user_request.get_json()['user']
@@ -37,7 +37,7 @@ class QuestionsModel():
     def vote(self, vote, question_id, type):
         """ Allows a user to upvote or downvote a question """
 
-        question = [q for q in self.questions if q["id"] == question_id]
+        question = [quiz for quiz in self.questions if quiz["id"] == question_id]
       
         if question:
             question[0]["votes"] = int(question[0]["votes"]) + int(vote)
@@ -47,7 +47,6 @@ class QuestionsModel():
 
         return jsonify({"msg": "Question was not found", "status": 404}), 404  
 
-    
     def get_a_question(self, search_id):
         """ Returns a specific question record """
 

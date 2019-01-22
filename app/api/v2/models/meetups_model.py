@@ -8,6 +8,7 @@ from app.api.v2.models.users_model import UsersModel
 
 database = DatabaseHelper()
 
+
 class MeetUpsModel():
 
     def __init__(self):
@@ -15,31 +16,28 @@ class MeetUpsModel():
         self.questions = []
         self.rsvps = []
         self.helpers = UsersHelper()
-        
 
     def add_meetup(self, user_request):
         meetup = user_request.get_json()
 
         keys_expected = ["location", "images", "topic", "happeningOn", "Tags"]
 
-        ret = self.helpers.is_valid_user_request(keys_expected, user_request)
+        result = self.helpers.is_valid_user_request(keys_expected, user_request)
 
-        if ret[0] == 0:
-            return ret[1], 400
+        if result[0] == 0:
+            return result[1], 400
 
-        ret = self.helpers.is_blank_field(user_request)
+        result = self.helpers.is_blank_field(user_request)
 
-        if ret[0] == 0:
-            return ret[1], 400
+        if result[0] == 0:
+            return result[1], 400
 
         columns = 'user_id, location, images, topic, happeningOn, Tags, created_on'
         values= "1"+",'"+meetup['location']+"','"+",".join(meetup['images'])+"','"+meetup["topic"]+"','"+meetup['happeningOn']+"','"+",".join(meetup['Tags'])+"','"\
                 +str(date.today())+"'"
 
         return database.insert_into_db('meetups', columns, values, 'Meetup')
-
-        #return jsonify({"msg": "meetup was added", "data": meetups, "status": 200})
-
+    
     def get_meetups(self):
         expression = "happeningon >= '{0}'".format(date.today())
         self.meetups = database.find_in_db('meetups', expression)
@@ -66,21 +64,21 @@ class MeetUpsModel():
         return jsonify({"msg": "meetup was not found", "status": 404}), 404
 
     def rsvp_meetup(self, meetup_id, request):
-        Allows a user to rsvp a meetup 
+        ''' Allows a user to rsvp a meetup '''
         rsvp = {}
         keys_expected = ["user", "meetup", "response"]
 
-        ret = self.helpers.is_valid_user_request(keys_expected, request)
+        result = self.helpers.is_valid_user_request(keys_expected, request)
 
-        if ret[0] == 0:
-            return ret[1], 400
+        if result[0] == 0:
+            return result[1], 400
 
-        ret = self.helpers.is_blank_field(request)
+        result = self.helpers.is_blank_field(request)
 
-        if ret[0] == 0:
-            return ret[1], 400
+        if result[0] == 0:
+            return result[1], 400
 
-        meetup = [m for m in self.meetups if m["id"] == meetup_id]
+        meetup = [item for item in self.meetups if item["id"] == meetup_id]
 
         if meetup:
             rsvp["id"] = len(self.rsvps) + 1

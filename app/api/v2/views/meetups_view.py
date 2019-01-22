@@ -10,7 +10,7 @@ users_model = UsersModel()
 
 
 @meetupV2.route('/meetups', methods=['POST'])
-#@users_model.token_required
+@users_model.token_required
 def add_meetup():
 	return meetups_model.add_meetup(request)
 
