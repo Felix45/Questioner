@@ -6,7 +6,7 @@ from functools import wraps
 
 from flask import Flask, jsonify, request
 from werkzeug.security import generate_password_hash, check_password_hash
-from app.api.v1.utils.user_validator import UsersHelper
+from app.api.v2.utils.user_validator import UsersHelper
 from app.api.v2.utils.database_helper import DatabaseHelper
 
 

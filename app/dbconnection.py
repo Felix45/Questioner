@@ -4,9 +4,16 @@ import psycopg2
 
 class DbConnection:
 
+    def __init__(self):
+
+        if os.getenv('FLASK_ENV') == 'testing':
+            self.conn = psycopg2.connect(os.getenv("DATABASE_TEST_URL"))
+        else:
+            self.conn = psycopg2.connect(os.getenv("DATABASE_URL"))
+        print self.conn
+
     def db_connection(self):
         """ Establishes connection to a database """
-        self.conn = psycopg2.connect(os.getenv('DATABASE_URL'))
         return self.conn
 
     def get_connection(self):
@@ -83,7 +90,7 @@ class DbConnection:
                             current_timestamp,
                             'hello,world',
                             1
-                        )
+                        ) ON CONFLICT(email) DO NOTHING
         """
 
         return [TABLE_USERS, TABLE_MEETUPS, TABLE_QUESTIONS, TABLE_RSVPS], ADMIN_USER
@@ -101,11 +108,14 @@ class DbConnection:
     def setUpTestDb(self):
         """ Sets up a test database """
         self.execute_queries()
+        curs = self.get_connection().cursor()
+        curs.execute(self.create_database_tables()[1])
         self.get_connection().commit()
 
     def destroyTestDb(self):
         """ Drop tables in test database """
         curs = self.get_connection().cursor()
         curs.execute(self.db_clean())
-        curs.execute(self.create_database_tables()[0])
         self.get_connection().commit()
+
+dbConn = DbConnection()
