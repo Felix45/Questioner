@@ -1,14 +1,17 @@
 """ Contains helper functions related to database transactions """
+import os
 import psycopg2
 from psycopg2.extras import DictCursor
 from flask import jsonify
-from app.dbconnection import DbConnection
+from app.dbconnection import dbConn
 
 
 class DatabaseHelper:
     def __init__(self):
         ''' Creates an admin user '''
-        self.conn = DbConnection().db_connection()
+        print os.getenv('FLASK_ENV')
+        self.conn = dbConn.get_connection()
+        print(self.conn)
 
     def insert_into_db(self, table, columns, values, record):
         """ INSERT INTO A TABLE """
