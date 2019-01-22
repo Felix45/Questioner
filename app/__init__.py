@@ -1,6 +1,9 @@
 """ Register application Blueprints """
+import os
 from flask import Flask
 from instance.config import app_config
+from app.dbconnection import DbConnection
+
 from app.api.v2.views.user_view import userV2
 from app.api.v2.views.meetups_view import meetupV2
 from app.api.v2.views.questions_view import questionV2
@@ -15,7 +18,7 @@ def create_app(config_name='development'):
 
     app = Flask(__name__, instance_relative_config=True)
     app.url_map.strict_slashes = False
-    app.config.from_object(app_config['development'])
+    app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
 
     app.register_blueprint(userV1, url_prefix='/api/v1')
@@ -25,9 +28,5 @@ def create_app(config_name='development'):
     app.register_blueprint(userV2, url_prefix='/api/v2')
     app.register_blueprint(meetupV2, url_prefix='/api/v2')
     app.register_blueprint(questionV2, url_prefix='/api/v2')
-
-    @app.route("/")
-    def function():
-        return "hello, World"
 
     return app
