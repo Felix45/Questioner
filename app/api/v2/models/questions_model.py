@@ -2,7 +2,7 @@
 from datetime import date
 import json
 from flask import Flask, request, jsonify
-from app.api.v1.utils.user_validator import UsersHelper
+from app.api.v2.utils.user_validator import UsersHelper
 from app.api.v2.utils.database_helper import DatabaseHelper
 from app.api.v2.models.users_model import UsersModel
 
