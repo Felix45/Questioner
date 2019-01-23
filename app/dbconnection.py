@@ -1,17 +1,17 @@
 import os
 import psycopg2
+from flask import current_app
 
 
 class DbConnection:
 
     def __init__(self):
-
-        if os.getenv('FLASK_ENV') == 'testing':
-            self.conn = psycopg2.connect(os.getenv("DATABASE_TEST_URL"))
-        else:
+        ''' Initializes a database connection '''
+        if os.getenv('FLASK_ENV') == 'development':
             self.conn = psycopg2.connect(os.getenv("DATABASE_URL"))
-        print self.conn
-
+        else:
+            self.conn = psycopg2.connect(os.getenv("DATABASE_TEST_URL"))
+            
     def db_connection(self):
         """ Establishes connection to a database """
         return self.conn
@@ -76,6 +76,15 @@ class DbConnection:
                             user_id INTEGER NOT NULL, 
                             response VARCHAR (200)
         );"""
+        TABLE_COMMENTS = """
+                        CREATE TABLE IF NOT EXISTS comments(
+                            Id serial PRIMARY KEY NOT NULL,
+                            question_id INTEGER NOT NULL REFERENCES questions(Id),
+                            created_by INTEGER NOT NULL REFERENCES users(Id),
+                            created_on TIMESTAMP NOT NULL DEFAULT current_timestamp,
+                            comment VARCHAR(200) NOT NULL
+                        )
+        """
 
         ADMIN_USER = """
                         INSERT INTO users(firstname,lastname,
@@ -93,11 +102,13 @@ class DbConnection:
                         ) ON CONFLICT(email) DO NOTHING
         """
 
-        return [TABLE_USERS, TABLE_MEETUPS, TABLE_QUESTIONS, TABLE_RSVPS], ADMIN_USER
+        return [TABLE_USERS, TABLE_MEETUPS, TABLE_QUESTIONS, TABLE_COMMENTS,
+                TABLE_RSVPS], ADMIN_USER
 
     def execute_queries(self):
+        ''' Creates all the tables in application '''
         curs = self.get_connection().cursor()
-        '''curs.execute(self.db_clean())'''
+        curs.execute(self.db_clean())
         for query in self.create_database_tables()[0]:
             curs.execute(query)
         

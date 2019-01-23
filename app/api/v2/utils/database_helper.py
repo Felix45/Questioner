@@ -19,7 +19,6 @@ class DatabaseHelper:
         sql = "INSERT INTO {table} ({col}) VALUES ({val})".format(table=table,
                                                                   col=columns,
                                                                   val=values)
-
         try:
             cursor.execute(sql)
         except:
@@ -34,7 +33,10 @@ class DatabaseHelper:
         cursor = self.conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
         sql = "SELECT * FROM {table} WHERE {field} ".format(table=table,
                                                             field=field)
-        cursor.execute(sql)
+        try:
+            cursor.execute(sql)
+        except:
+            return jsonify({'msg': 'could not perform your request'})
         row = cursor.fetchall()
         return self.result_in_dict(row)
     

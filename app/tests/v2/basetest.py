@@ -10,8 +10,8 @@ class SetUpTestClient(unittest.TestCase):
 		''' Sets up the test client for stackoverflowlite Api '''
 		self.app = create_app('testing')
 		self.client = self.app.test_client()
-		os.environ['FLASK_ENV'] = 'testing'
-		print os.getenv('FLASK_ENV')
+		# os.environ['FLASK_ENV'] = 'testing'
+		# print os.getenv('FLASK_ENV')
 		dbConn.setUpTestDb()
 					
 	def tearDown(self):

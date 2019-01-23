@@ -7,6 +7,15 @@ import datetime
 class MeetupTest(SetUpTestClient):
 
     def test_add_questions(self):
+        meetup = {
+                    "location": "PAC",
+                    "images": ["hello.png", "wazito.jpg", "babayao.png"],
+                    "topic": "Kilimani Mums",
+                    "happeningOn": datetime.datetime(2019, 5, 17),
+                    "Tags": ["women", "mums", "ladies"]
+        }
+        res = self.client.post("/api/v2/meetups", json=meetup, content_type='application/json')
+        self.assertEqual(res.status_code, 201)
         question = {
 
             "user": 1,
@@ -69,4 +78,3 @@ class MeetupTest(SetUpTestClient):
         self.assertEqual(res.status_code, 200)
         res = self.client.get("/api/v2/questions/100")
         self.assertEqual(res.status_code, 404)
- 
