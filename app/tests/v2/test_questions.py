@@ -78,4 +78,3 @@ class MeetupTest(SetUpTestClient):
         self.assertEqual(res.status_code, 200)
         res = self.client.get("/api/v2/questions/100")
         self.assertEqual(res.status_code, 404)
- 

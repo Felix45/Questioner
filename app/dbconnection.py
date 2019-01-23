@@ -6,9 +6,7 @@ from flask import current_app
 class DbConnection:
 
     def __init__(self):
-
-        ''' self.conn = psycopg2.connect(current_app.config['DATABASE_URL']) '''
-
+        ''' Initializes a database connection '''
         if os.getenv('FLASK_ENV') == 'development':
             self.conn = psycopg2.connect(os.getenv("DATABASE_URL"))
         else:

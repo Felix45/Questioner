@@ -34,5 +34,4 @@ class CommentTest(SetUpTestClient):
                                content_type='application/json')
         self.assertEqual(res.status_code, 400)
         self.assertIn('sent an empty request', str(res.data))
-
-    
+  
