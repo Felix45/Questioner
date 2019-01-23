@@ -1,10 +1,22 @@
 language: python
 python:
       - "3.6"
+env:
+  DATABASE_URL="dbname='questioner' host='127.0.0.1' port='5432' user='postgres' password=''"
+  DATABASE_TEST_URL="dbname='questioner' host='127.0.0.1' port='5432' user='postgres' password=''"
+  APP_SETTINGS="testing"
 install:
       - pip install -r requirements.txt
       - pip install pytest-cov
       - pip install coveralls
+services:
+  - postgresql
+addons:
+  postgresql: "9.6"
+
+before_script:
+  - psql -c 'CREATE DATABASE questioner' -U postgres
+  - psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public to postgres ;" -U postgres
 script:
       - pytest --cov app
 after_success:
