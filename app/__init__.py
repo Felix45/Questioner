@@ -7,6 +7,7 @@ from app.dbconnection import DbConnection
 from app.api.v2.views.user_view import userV2
 from app.api.v2.views.meetups_view import meetupV2
 from app.api.v2.views.questions_view import questionV2
+from app.api.v2.views.comments_view import commentV2
 
 from app.api.v1.views.user_view import userV1
 from app.api.v1.views.meetups_view import meetupV1
@@ -28,5 +29,6 @@ def create_app(config_name='development'):
     app.register_blueprint(userV2, url_prefix='/api/v2')
     app.register_blueprint(meetupV2, url_prefix='/api/v2')
     app.register_blueprint(questionV2, url_prefix='/api/v2')
+    app.register_blueprint(commentV2, url_prefix='/api/v2')
 
     return app
