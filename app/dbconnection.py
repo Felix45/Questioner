@@ -10,7 +10,7 @@ class DbConnection:
             self.conn = psycopg2.connect(os.getenv("DATABASE_TEST_URL"))
         else:
             self.conn = psycopg2.connect(os.getenv("DATABASE_URL"))
-        print self.conn
+        print (self.conn)
 
     def db_connection(self):
         """ Establishes connection to a database """
@@ -76,6 +76,18 @@ class DbConnection:
                             user_id INTEGER NOT NULL, 
                             response VARCHAR (200)
         );"""
+        TABLE_COMMENTS = """
+                        CREATE TABLE IF NOT EXISTS comments(
+                            Id serial PRIMARY KEY NOT NULL,
+                            question_id INTEGER NOT NULL REFERENCES questions(Id),
+                            created_by INTEGER NOT NULL REFERENCE users(Id),
+                            created_on TIMESTAMP NOT NULL DEFAULT current_timestamp,
+                            body VARCHAR(200) NOT NULL
+                        )
+
+
+
+        """
 
         ADMIN_USER = """
                         INSERT INTO users(firstname,lastname,
