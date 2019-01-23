@@ -2,11 +2,12 @@
 from datetime import date
 import json
 from flask import Flask, request, jsonify
-from app.api.v1.utils.user_validator import UsersHelper
+from app.api.v2.utils.user_validator import UsersHelper
 from app.api.v2.utils.database_helper import DatabaseHelper
 from app.api.v2.models.users_model import UsersModel
 
 database = DatabaseHelper()
+
 
 class QuestionsModel():
 
@@ -18,43 +19,39 @@ class QuestionsModel():
         """ Add a question record """
         keys_expected = ["user", "meetup", "title", "body"]
 
-        ret = self.helpers.is_valid_user_request(keys_expected, user_request)
+        result = self.helpers.is_valid_user_request(keys_expected, user_request)
 
-        if ret[0] == 0:
-            return ret[1], 400
+        if result[0] == 0:
+            return result[1], 400
 
-        ret = self.helpers.is_blank_field(user_request)
+        result = self.helpers.is_blank_field(user_request)
 
-        if ret[0] == 0:
-            return ret[1], 400
+        if result[0] == 0:
+            return result[1], 400
         data = user_request.get_json()
-        data['votes']=0
+        data['votes'] = 0
         columns = 'created_by,meetup_id,title,body,votes'
-        rows="%d, %d, %s, %s, %d" %( data['user'],data['meetup'],"'"+data['title']+"'","'"+data['body']+"'",data['votes'])
-        #rows=""+data['user']+", "+data['meetup']+", '"+data['title']+"','"+data['body']+"', "+data['votes']+""
-        
+        rows = "%d, %d, %s, %s, %d" % (data['user'],data['meetup'],"'"+data['title']+"'","'"+data['body']+"'",data['votes'])
+       
         if database.find_in_db('users', 'id=%d'%(data['user'],)) and database.find_in_db('meetups', 'Id=%d'%(data['meetup'],)):
             return database.insert_into_db('questions', columns, rows, 'question')
         return jsonify({'msg':'Question was not added'}), 400
         
-
     def vote(self, question_id, type):
         """ Allows a user to upvote or downvote a question """
         question = database.find_in_db('questions','id=%d'%(question_id,))
         
         if question and type == 'upvote':
             expression = "votes=votes+1"
-            return database.update_columns_record('questions',expression,'id',question_id)
+            return database.update_columns_record('questions', expression, 'id', question_id)
         elif question and type == 'downvote':
             expression = "votes=votes-1"
-            return database.update_columns_record('questions',expression,'id',question_id)
+            return database.update_columns_record('questions', expression, 'id', question_id)
         else:
             return jsonify({"msg": "Question was not found", "status": 404}), 404  
             
         return jsonify({"msg": "{} was successful".format(type),
                             "status": 201, "data": self.questions}), 201
-
-        
 
     def get_a_question(self, search_id):
         """ Returns a specific question record """

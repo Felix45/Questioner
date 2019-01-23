@@ -6,7 +6,7 @@ from functools import wraps
 
 from flask import Flask, jsonify, request
 from werkzeug.security import generate_password_hash, check_password_hash
-from app.api.v1.utils.user_validator import UsersHelper
+from app.api.v2.utils.user_validator import UsersHelper
 from app.api.v2.utils.database_helper import DatabaseHelper
 
 
@@ -20,9 +20,11 @@ class UsersModel:
 
     def add_user(self, user_request):
         """ register a user """
-        global users,database 
-        keys_expected = ['firstname', 'lastname', 'othername', 'username', 'email', 'isAdmin', 'password', 'cpassword', 'phoneNumber']
-        
+        global users, database
+        keys_expected = ['firstname', 'lastname', 'othername', 'username',
+                         'email', 'isAdmin', 'password', 'cpassword',
+                         'phoneNumber']
+ 
         ret = helpers.is_valid_user_request(keys_expected, user_request)
 
         if ret[0] == 0:
@@ -53,8 +55,8 @@ class UsersModel:
                                         user_request.get_json()['cpassword'])
         if ret[0] == 0:
             return ret[1], 400
-        
-        return self.insert_db(user_request)    
+  
+        return self.insert_db(user_request)
 
     def insert_db(self, user_request):
         new_user = {}
@@ -69,14 +71,16 @@ class UsersModel:
         new_user['isadmin'] = user_request.get_json()['isAdmin']
         new_user['phone_number'] = user_request.get_json()['phoneNumber']
         
-        columns = 'firstname, lastname, othername, username, email, password, registered, isadmin, phone_number'
-        values= "'"+new_user['firstname']+"','"+new_user['lastname']+"','"+new_user['othername']+"','"+new_user['username']+"','"+new_user['email']+"','"+\
-                 new_user['password']+"','"+new_user['registered']+"',"+new_user['isadmin']+",'"+new_user['phone_number']+"'"
+        columns = 'firstname, lastname, othername, username, email, password, \
+                   registered, isadmin, phone_number'
+        values = "'"+new_user['firstname']+"','"+new_user['lastname']+"', \
+                '"+new_user['othername']+"','"+new_user['username']+"', \
+                '"+new_user['email']+"','" + new_user['password']+"', \
+                '"+new_user['registered']+"',"+new_user['isadmin']+", \
+                '"+new_user['phone_number']+"'"
         
-        return database.insert_into_db('users', columns, values , 'user' )
+        return database.insert_into_db('users', columns, values, 'user')
         
-
-
     def get_users(self):
         """ A list containing all users """
         global users
@@ -88,8 +92,7 @@ class UsersModel:
     def token_required(self, f):
         @wraps(f)
         def decorated(*args, **kwargs):
-            token = request.args.get('token') or request.get_json()['token']
-            #return jsonify({'msg': jwt.decode(token, 'Felix45')})
+            token = request.headers.get('Authorization')
             if not token:
                 return jsonify({'msg': 'need to login to view this'}), 403
             try:
@@ -125,5 +128,6 @@ class UsersModel:
                                 "exp": datetime.datetime.utcnow() + datetime.timedelta(30)
                                 }, 'Felix45')
             return jsonify({'msg': 'logged in', "data": users, "token":
-                            token.decode('UTF-8'), "status": 200 }), 200
-        return jsonify({'msg': 'user {} not found:'.format(username),"status": 404}), 404
+                            token.decode('UTF-8'), "status": 200}), 200
+        return jsonify({'msg': 'user {} not found:'.format(username), "status":
+                        404}), 404

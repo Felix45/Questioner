@@ -3,3 +3,5 @@ env/
 *.pyc
 __pycache__/
 .vscode/
+*.coverage
+*.env

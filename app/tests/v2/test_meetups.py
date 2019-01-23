@@ -1,5 +1,5 @@
 """ Contains tests related to meetups """
-from app.tests.v1.basetest import SetUpTestClient
+from app.tests.v2.basetest import SetUpTestClient
 import datetime
 
 
@@ -24,15 +24,15 @@ class MeetupTest(SetUpTestClient):
                     "Tags": ["women", "mums", "ladies"]
         }
 
-        res = self.client.post("/api/v1/meetups", json=meetup, content_type='application/json')
-        self.assertEqual(res.status_code, 200)
-        self.assertIn('user was added', str(res.data))
+        res = self.client.post("/api/v2/meetups", json=meetup, content_type='application/json')
+        self.assertEqual(res.status_code, 201)
+        self.assertIn('Meetup added successfully', str(res.data))
 
-        res = self.client.post("/api/v1/meetups", json=meetup_two, content_type='application/json')
+        res = self.client.post("/api/v2/meetups", json=meetup_two, content_type='application/json')
         self.assertEqual(res.status_code, 400)
         self.assertIn('Field value was empty:', str(res.data))
 
-        res = self.client.post("/api/v1/meetups", json=meetup_empty,
+        res = self.client.post("/api/v2/meetups", json=meetup_empty,
                                content_type='application/json')
         self.assertEqual(res.status_code, 400)
         self.assertIn('sent an empty request', str(res.data))
@@ -62,14 +62,14 @@ class MeetupTest(SetUpTestClient):
                 "happeningOn": datetime.datetime(2019, 5, 17),
                 "Tags": ["women", "mums", "ladies"]
         }
-        res = self.client.post("/api/v1/meetups", json=meetup, content_type='application/json')
-        self.assertEqual(res.status_code, 200)
-        res = self.client.post("/api/v1/meetups", json=meetup_one, content_type='application/json')
+        res = self.client.post("/api/v2/meetups", json=meetup, content_type='application/json')
+        self.assertEqual(res.status_code, 201)
+        res = self.client.post("/api/v2/meetups", json=meetup_one, content_type='application/json')
         self.assertEqual(res.status_code, 400)
-        res = self.client.post("/api/v1/meetups", json=meetup_two, content_type='application/json')
-        self.assertEqual(res.status_code, 200)
+        res = self.client.post("/api/v2/meetups", json=meetup_two, content_type='application/json')
+        self.assertEqual(res.status_code, 201)
 
-        res = self.client.get("/api/v1/meetups/upcoming")
+        res = self.client.get("/api/v2/meetups/upcoming")
         self.assertEqual(res.status_code, 200)
 
     def test_view_specific_meetup(self):
@@ -89,20 +89,20 @@ class MeetupTest(SetUpTestClient):
                 "happeningOn": datetime.datetime(2019, 5, 17),
                 "Tags": ["law", "medicine", "Education"]
         }
-        res = self.client.post("/api/v1/meetups", json=meetup, content_type='application/json')
-        self.assertEqual(res.status_code, 200)
-        res = self.client.post("/api/v1/meetups", json=meetup_one, content_type='application/json')
+        res = self.client.post("/api/v2/meetups", json=meetup, content_type='application/json')
+        self.assertEqual(res.status_code, 201)
+        res = self.client.post("/api/v2/meetups", json=meetup_one, content_type='application/json')
+        self.assertEqual(res.status_code, 201)
+
+        res = self.client.get("/api/v2/meetups/1")
         self.assertEqual(res.status_code, 200)
 
-        res = self.client.get("/api/v1/meetups/1")
+        res = self.client.get("/api/v2/meetups/2")
         self.assertEqual(res.status_code, 200)
 
-        res = self.client.get("/api/v1/meetups/2")
-        self.assertEqual(res.status_code, 200)
-
-        res = self.client.get("/api/v1/meetups/50")
+        res = self.client.get("/api/v2/meetups/500")
         self.assertEqual(res.status_code, 404)
-        self.assertIn('user was not found', str(res.data))
+        self.assertIn('Meetup was not found', str(res.data))
     
     def test_rsvp_meetups(self):
         """ Allows users to confirm meetup attendance """
@@ -131,16 +131,16 @@ class MeetupTest(SetUpTestClient):
                 "user": 1,
                 "response": "Yes"
         }
-        res = self.client.post("/api/v1/meetups", json=meetup,
+        res = self.client.post("/api/v2/meetups", json=meetup,
                                content_type='application/json')
         self.assertEqual(res.status_code, 200)
-        res = self.client.post("/api/v1/meetups", json=meetup_one,
+        res = self.client.post("/api/v2/meetups", json=meetup_one,
                                content_type='application/json')
         self.assertEqual(res.status_code, 200)
 
-        res = self.client.post("/api/v1/meetups/1/rsvp", json=rsvp,
+        res = self.client.post("/api/v2/meetups/1/rsvp", json=rsvp,
                                content_type='application/json')
         self.assertEqual(res.status_code, 201)
-        res = self.client.post("/api/v1/meetups/50/rsvp", json=rsvp_two,
+        res = self.client.post("/api/v2/meetups/50/rsvp", json=rsvp_two,
                                content_type='application/json')
         self.assertEqual(res.status_code, 404)
