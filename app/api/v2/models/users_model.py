@@ -92,7 +92,7 @@ class UsersModel:
     def token_required(self, f):
         @wraps(f)
         def decorated(*args, **kwargs):
-            token = request.headers.get('Authorization')
+            token = request.headers.get('Authorization').split()[1]
             if not token:
                 return jsonify({'msg': 'need to login to view this'}), 403
             try:
