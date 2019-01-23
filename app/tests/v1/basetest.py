@@ -11,6 +11,7 @@ class SetUpTestClient(unittest.TestCase):
 		
 	def tear_down(self):
 		''' Destroys the test client '''
+		
 		self.app.testing = False
 		self.app = None
 		
