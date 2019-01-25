@@ -1,5 +1,7 @@
 """ Manages users details """
 import jwt
+import re
+import string
 import datetime
 from datetime import date
 from functools import wraps
@@ -59,6 +61,7 @@ class UsersModel:
         return self.insert_db(user_request)
 
     def insert_db(self, user_request):
+        ''' Adds a user into the datbase '''
         new_user = {}
         password = user_request.get_json()['password']
         new_user['firstname'] = user_request.get_json()['firstname']
@@ -70,7 +73,10 @@ class UsersModel:
         new_user['registered'] = str(date.today())
         new_user['isadmin'] = user_request.get_json()['isAdmin']
         new_user['phone_number'] = user_request.get_json()['phoneNumber']
-        
+
+        if not re.match(r'[0-9]', new_user['phone_number']):
+            return jsonify({'msg': 'Phone number is not correct', 'status': 400}), 400
+
         columns = 'firstname, lastname, othername, username, email, password, \
                    registered, isadmin, phone_number'
         values = "'"+new_user['firstname']+"','"+new_user['lastname']+"', \
@@ -83,20 +89,21 @@ class UsersModel:
         
     def get_users(self):
         """ A list containing all users """
-        global users
+        users = database.fethall_records('users')
 
         if len(users) == 0:
-            return jsonify({'msg': 'no user was found'})    
+            return jsonify({'msg': 'no user was found', 'data': users}), 404    
         return jsonify({"data": users}), 200
     
     def token_required(self, f):
+        ''' Check if a user has a valid token '''
         @wraps(f)
         def decorated(*args, **kwargs):
-            token = request.headers.get('Authorization').split()[1]
-            if not token:
-                return jsonify({'msg': 'need to login to view this'}), 403
+            if not request.headers.get('Authorization'):
+                return jsonify({'msg': 'You need a login token to view this'})
             try:
-                data = jwt.decode(token, 'Felix45')
+                token = request.headers.get('Authorization').split()[1]
+                data = jwt.decode(token, 'Felix45', algorithms=["HS256"])
             except:
                 return jsonify({'msg': 'You need to login to view this'}), 403
 
@@ -104,6 +111,7 @@ class UsersModel:
         return decorated
 
     def login_user(self, request):
+        ''' Login a user in to the application '''
         global users, token
         keys_expected = ['username', 'password']
 
@@ -122,12 +130,20 @@ class UsersModel:
 
         expression = 'username='+"'"+username+"'"
         users = database.find_in_db('users', expression)
-
+        
         if users and check_password_hash(users[0]['password'], password):
-            token = jwt.encode({"user": username,
-                                "exp": datetime.datetime.utcnow() + datetime.timedelta(30)
-                                }, 'Felix45')
+            token = jwt.encode({"user": users[0]['id'],
+                                "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
+                                }, 'Felix45', algorithm='HS256').decode('UTF-8')
             return jsonify({'msg': 'logged in', "data": users, "token":
-                            token.decode('UTF-8'), "status": 200}), 200
+                            token, "status": 200}), 200
         return jsonify({'msg': 'user {} not found:'.format(username), "status":
                         404}), 404
+
+    def get_logged_in_user(self, user_id):
+        ''' Returns details of logged in user '''
+        
+        expression = "isadmin='%s' AND id=%d" % (str(True).lower(), user_id['user'])
+        user = database.find_in_db('users', expression)
+
+        return user
