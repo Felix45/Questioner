@@ -39,7 +39,7 @@ class UsersModel:
 
         expression = 'email='+"'"+user_request.get_json()['email']+"'"
         users = database.find_in_db('users', expression)
-         
+        print(expression)
         if users:
             return jsonify({'message': 'email is already in use '}), 409
         
