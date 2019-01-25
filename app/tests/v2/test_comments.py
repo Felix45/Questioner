@@ -17,12 +17,13 @@ class CommentTest(SetUpTestClient):
         res = self.client.post("/api/v2/meetups", json=meetup, headers=self.headers)
         print(res.data)
         question = {
+            "meetup":1,
             "title": "How do i install python in Ubuntu 18.04?",
             "body": "I have been trying to install python in ubuntu 18.04 with no success, someone help please."
         }
         res = self.client.post("/api/v2/questions", json=question,
                                headers=self.headers)
-
+        print(res.data)
         comment = {
                 "question_id": 1,
                 "comment": "This comment should go to a question"
