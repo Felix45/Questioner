@@ -1,12 +1,14 @@
 """ Manages all the meetup functions """
 from datetime import date
 import json
+import jwt
 from flask import Flask, request, jsonify
 from app.api.v2.utils.user_validator import UsersHelper
 from app.api.v2.utils.database_helper import DatabaseHelper
 from app.api.v2.models.users_model import UsersModel
 
 database = DatabaseHelper()
+usermodel = UsersModel()
 
 
 class MeetUpsModel():
@@ -31,11 +33,22 @@ class MeetUpsModel():
 
         if result[0] == 0:
             return result[1], 400
+        token = request.headers.get('Authorization').split()[1]
+        user_id = jwt.decode(token, 'Felix45', algorithms=['HS256'])
+        
+        if not UsersModel().get_logged_in_user(user_id):
+            return jsonify({'msg': 'You can not add a meetup', 'status': 403}), 403
 
-        columns = 'user_id, location, images, topic, happeningOn, Tags, created_on'
-        values= "1"+",'"+meetup['location']+"','"+",".join(meetup['images'])+"','"+meetup["topic"]+"','"+meetup['happeningOn']+"','"+",".join(meetup['Tags'])+"','"\
-                +str(date.today())+"'"
-
+        columns = 'user_id, location, images, topic, happeningOn, Tags,\
+                   created_on'
+        images = ",".join(meetup['images'])
+        tags = ",".join(meetup['Tags'])
+        
+        values = "%d,'%s','%s','%s','%s','%s','%s'" % (user_id['user'],
+                  meetup['location'],
+                  images, meetup["topic"], meetup['happeningOn'], tags,
+                  str(date.today()))
+        
         return database.insert_into_db('meetups', columns, values, 'Meetup')
     
     def get_meetups(self):
@@ -55,37 +68,17 @@ class MeetUpsModel():
         return jsonify({"msg": "Meetup was not found", "data": [], "status": 404}), 404
     
     def delete_meetup(self, meetup_id):
+        token = request.headers.get('Authorization').split()[1]
+        if not UsersModel().get_logged_in_user(token):
+            return jsonify({'msg': 'You can not  a meetup', 'status': 403}), 403
+        
         expression = "id={0}".format(meetup_id)
         meetup = database.find_in_db('meetups', expression)
-
+        
         if meetup:
             database.delete_record("meetups", "id", meetup_id)
-            return jsonify({"msg": "meetup was deleted", "status": 200 }), 200 
-        return jsonify({"msg": "meetup was not found", "status": 404}), 404
-
-    def rsvp_meetup(self, meetup_id, request):
-        ''' Allows a user to rsvp a meetup '''
-        rsvp = {}
-        keys_expected = ["user", "meetup", "response"]
-
-        result = self.helpers.is_valid_user_request(keys_expected, request)
-
-        if result[0] == 0:
-            return result[1], 400
-
-        result = self.helpers.is_blank_field(request)
-
-        if result[0] == 0:
-            return result[1], 400
-
-        meetup = [item for item in self.meetups if item["id"] == meetup_id]
-
-        if meetup:
-            rsvp["id"] = len(self.rsvps) + 1
-            rsvp["meetup"] = meetup_id
-            rsvp["user"] = request.get_json()["user"]
-            rsvp["response"] = request.get_json()["response"]
-            self.rsvps.append(rsvp)
-            return jsonify({"msg": "rsvp was created", "data": rsvp, "status": 201}), 201
-
-        return jsonify({"msg": "Meetup was not found", "status": 404}), 404
+            return jsonify({"msg": "meetup was deleted", "status": 200,
+                            'data': meetup}), 200 
+        return jsonify({"msg": "meetup was not found", "status": 404, "data": 
+                        meetup}), 404
+ 
