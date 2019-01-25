@@ -1,6 +1,7 @@
 """ Manages all the meetup functions """
 from datetime import date
 import json
+import jwt
 from flask import Flask, request, jsonify
 from app.api.v2.utils.user_validator import UsersHelper
 from app.api.v2.utils.database_helper import DatabaseHelper
@@ -17,10 +18,13 @@ class QuestionsModel():
 
     def add_a_question(self, user_request):
         """ Add a question record """
-        keys_expected = ["user", "meetup", "title", "body"]
+        keys_expected = ["meetup", "title", "body"]
+
+        token = request.headers.get('Authorization').split()[1]
+        user_id = jwt.decode(token, 'Felix45', algorithms=['HS256'])
 
         result = self.helpers.is_valid_user_request(keys_expected, user_request)
-
+        
         if result[0] == 0:
             return result[1], 400
 
@@ -29,11 +33,12 @@ class QuestionsModel():
         if result[0] == 0:
             return result[1], 400
         data = user_request.get_json()
+        
         data['votes'] = 0
         columns = 'created_by,meetup_id,title,body,votes'
-        rows = "%d, %d, %s, %s, %d" % (data['user'],data['meetup'],"'"+data['title']+"'","'"+data['body']+"'",data['votes'])
+        rows = "%d, %d, %s, %s, %d" % (user_id['user'],data['meetup'],"'"+data['title']+"'","'"+data['body']+"'",data['votes'])
        
-        if database.find_in_db('users', 'id=%d'%(data['user'],)) and database.find_in_db('meetups', 'Id=%d'%(data['meetup'],)):
+        if database.find_in_db('users', 'id=%d'%(user_id['user'],)) and database.find_in_db('meetups', 'Id=%d'%(data['meetup'],)):
             return database.insert_into_db('questions', columns, rows, 'question')
         return jsonify({'msg':'Question was not added'}), 400
         
@@ -55,10 +60,7 @@ class QuestionsModel():
 
     def get_a_question(self, search_id):
         """ Returns a specific question record """
-
-        if len(self.questions) == 0:
-            return jsonify({"msg": "no questions were found", "data": self.questions, "status": 200}), 200      
-        for question in self.questions:
-            if question['id'] == search_id:
-                return jsonify({"msg": "question was found", "data": question, "status": 200})     
-        return jsonify({"msg": "question was not found", "data": [], "status": 404}), 404
+        question = database.find_in_db('questions', 'id=%d' % (search_id))
+        if question:
+            return jsonify({"msg": "Question was found", "data": question, "status":200}), 200
+        return jsonify({"msg": "Question was not found", "data":question, "status": 404}), 404
