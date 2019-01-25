@@ -1,8 +1,8 @@
 ''' Sets up the test client '''
 import os
 import unittest
-from app import create_app
 from app.dbconnection import dbConn
+from app import create_app
 
 
 class SetUpTestClient(unittest.TestCase):
@@ -10,13 +10,16 @@ class SetUpTestClient(unittest.TestCase):
 		''' Sets up the test client for stackoverflowlite Api '''
 		self.app = create_app('testing')
 		self.client = self.app.test_client()
-		# os.environ['FLASK_ENV'] = 'testing'
-		# print os.getenv('FLASK_ENV')
-		dbConn.setUpTestDb()
+		self.user = {'username': 'Izzo', 'password': 'hello'}
+		result = self.client.post("/api/v2/auth/login/", json=self.user, content_type='application/json')
+		token = result.get_json()['token']
+		self.headers = {"Content-Type": 'application/json'}
+		self.headers["Authorization"] = "Bearer {}".format(token)
+		
 					
 	def tearDown(self):
 		''' Destroys the test client '''
-		#self.dbconn.destroyTestDb()
+		#dbConn.destroyTestDb()
 		
 if __name__ == '__main__':
 	unittest.main(verbosity=1)

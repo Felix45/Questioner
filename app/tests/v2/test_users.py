@@ -7,9 +7,8 @@ class UsersModelTest(SetUpTestClient):
 		""" Setup tests for user endpoints """
 		def test_get_users(self):
 
-			bad_token = {'token': 'hdhdkfjdkfkdfkdfdkfkdf'}
-			res = self.client.get("/api/v2/users/list/", json=bad_token, content_type='application/json')
-			self.assertEqual(res.status_code, 403)
+			res = self.client.get("/api/v2/users/list/", headers=self.headers)
+			self.assertEqual(res.status_code, 200)
 
 		def test_user_missing_fields(self):
 
