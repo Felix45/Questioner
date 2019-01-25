@@ -22,6 +22,7 @@ class UsersHelper:
 	def is_blank_field(self, user_request):
 		
 		for key, user_item in user_request.get_json().items():
+			
 			if user_item == '':
 				return False, jsonify({'message': 'Field value was empty: {}'.format(key)})
 				

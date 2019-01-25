@@ -1,18 +1,19 @@
 import os
 import psycopg2
 from flask import current_app
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class DbConnection:
 
-    def __init__(self):
+    def __init__(self,):
         ''' Initializes a database connection '''
         if os.getenv('FLASK_ENV') == 'development':
             self.conn = psycopg2.connect(os.getenv("DATABASE_URL"))
         else:
             self.conn = psycopg2.connect(os.getenv("DATABASE_TEST_URL"))
-            
-    def db_connection(self):
+       
+    def db_connection(self, app):
         """ Establishes connection to a database """
         return self.conn
 
@@ -22,28 +23,28 @@ class DbConnection:
 
     def db_clean(self):
         """ Deletes everything from the Database """
-        DROP_DATABASE = """
+        DROP_TABLES = """
                 DROP SCHEMA public CASCADE;
                 CREATE SCHEMA public;
                 GRANT USAGE ON SCHEMA public TO postgres;;
         """
-        return DROP_DATABASE
+        return DROP_TABLES
 
     def create_database_tables(self):
         """ Create all database tables """
-
+        
         TABLE_USERS = """ 
                              CREATE TABLE IF NOT EXISTS users (
                                 Id serial PRIMARY KEY NOT NULL,
-                                firstname VARCHAR (40) NOT NULL, 
-                                lastname VARCHAR (40) NOT NULL, 
+                                firstname VARCHAR (40) NOT NULL,
+                                lastname VARCHAR (40) NOT NULL,
                                 othername VARCHAR (40),
-                                email VARCHAR (40) UNIQUE NOT NULL, 
+                                email VARCHAR (40) UNIQUE NOT NULL,
                                 phone_number VARCHAR (40),
                                 username VARCHAR (40) UNIQUE NOT NULL,
                                 registered TIMESTAMP NOT NULL DEFAULT current_timestamp, 
                                 password VARCHAR (256) NOT NULL,
-                                IsAdmin VARCHAR (20) DEFAULT false
+                                IsAdmin VARCHAR (6) NULL DEFAULT 0
         );"""
 
         TABLE_MEETUPS = """ 
@@ -61,8 +62,8 @@ class DbConnection:
         TABLE_QUESTIONS = """ 
                         CREATE TABLE IF NOT EXISTS questions (
                             Id serial PRIMARY KEY NOT NULL,
-                            meetup_id INTEGER  REFERENCES meetups(Id), 
-                            created_by INTEGER NOT NULL REFERENCES users(Id), 
+                            meetup_id INTEGER  REFERENCES meetups(Id),
+                            created_by INTEGER NOT NULL REFERENCES users(Id),
                             created_on TIMESTAMP NOT NULL DEFAULT current_timestamp,
                             title VARCHAR (150) NOT NULL,
                             body VARCHAR (1000) NOT NULL, 
@@ -72,8 +73,8 @@ class DbConnection:
         TABLE_RSVPS = """ 
                         CREATE TABLE IF NOT EXISTS rsvps (
                             Id serial PRIMARY KEY NOT NULL,
-                            meetup_id INTEGER NOT NULL, 
-                            user_id INTEGER NOT NULL, 
+                            meetup_id INTEGER NOT NULL REFERENCES meetups(Id),
+                            user_id INTEGER NOT NULL REFERENCES users(Id),
                             response VARCHAR (200)
         );"""
         TABLE_COMMENTS = """
@@ -97,10 +98,10 @@ class DbConnection:
                             '0724603546',
                             'Izzo',
                             current_timestamp,
-                            'hello,world',
-                            1
+                            '%s',
+                            true
                         ) ON CONFLICT(email) DO NOTHING
-        """
+        """ % (generate_password_hash('hello'))
 
         return [TABLE_USERS, TABLE_MEETUPS, TABLE_QUESTIONS, TABLE_COMMENTS,
                 TABLE_RSVPS], ADMIN_USER
@@ -108,7 +109,7 @@ class DbConnection:
     def execute_queries(self):
         ''' Creates all the tables in application '''
         curs = self.get_connection().cursor()
-        curs.execute(self.db_clean())
+        #curs.execute(self.db_clean())
         for query in self.create_database_tables()[0]:
             curs.execute(query)
         
@@ -130,3 +131,4 @@ class DbConnection:
         self.get_connection().commit()
 
 dbConn = DbConnection()
+dbConn.setUpTestDb()

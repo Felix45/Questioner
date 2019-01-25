@@ -4,7 +4,7 @@ from app.tests.v2.basetest import SetUpTestClient
 import datetime
 
 
-class MeetupTest(SetUpTestClient):
+class QuestionsTest(SetUpTestClient):
 
     def test_add_questions(self):
         meetup = {
@@ -14,17 +14,15 @@ class MeetupTest(SetUpTestClient):
                     "happeningOn": datetime.datetime(2019, 5, 17),
                     "Tags": ["women", "mums", "ladies"]
         }
-        res = self.client.post("/api/v2/meetups", json=meetup, content_type='application/json')
+        res = self.client.post("/api/v2/meetups", json=meetup, headers=self.headers)
         self.assertEqual(res.status_code, 201)
         question = {
-
-            "user": 1,
             "meetup": 1,
             "title": "How do i install python in Ubuntu 18.04?",
             "body": "I have been trying to install python in ubuntu 18.04 with no success, someone help please."
         }
         res = self.client.post("/api/v2/questions", json=question,
-                               content_type='application/json')
+                               headers=self.headers)
         self.assertEqual(res.status_code, 201)
         self.assertIn('question added', str(res.data))
 
@@ -38,15 +36,15 @@ class MeetupTest(SetUpTestClient):
                              18.04 with no success, someone help please."
         }
         res = self.client.post("/api/v2/questions", json=question,
-                               content_type='application/json')
+                               headers=self.headers)
         self.assertEqual(res.status_code, 201)
         res = self.client.patch("/api/v2/questions/1/upvote", json=question,
-                                content_type="application/json")
+                                headers=self.headers)
         self.assertEqual(res.status_code, 201)
         self.assertIn("Update was successful", str(res.data))
 
         res = self.client.patch("/api/v2/questions/1/downvote", json=question,
-                                content_type="application/json")
+                                headers=self.headers)
         self.assertEqual(res.status_code, 201)
         self.assertIn("Update was successful", str(res.data))
 
@@ -67,10 +65,10 @@ class MeetupTest(SetUpTestClient):
                                 18.04 with no success, someone help please."
         }
         res = self.client.post("/api/v2/questions", json=question,
-                               content_type='application/json')
+                               headers=self.headers)
         self.assertEqual(res.status_code, 201)
         res = self.client.post("/api/v2/questions", json=question_two,
-                               content_type='application/json')
+                               headers=self.headers)
         self.assertEqual(res.status_code, 201)
         res = self.client.get("/api/v2/questions/1")
         self.assertEqual(res.status_code, 200)

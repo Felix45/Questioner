@@ -23,7 +23,7 @@ class UsersModelTest(SetUpTestClient):
 			self.assertIn('Field value was empty:', str(res.data))
 
 		def test_is_available(self):
-		
+			""" Test if username is available """
 			self.client.post("/api/v1/users/add/", json=user_4, content_type='application/json')
 			res = self.client.post("/api/v1/users/add/", json=user_5, content_type='application/json')
 			self.assertEqual(res.status_code, 409)

@@ -23,17 +23,16 @@ class MeetupTest(SetUpTestClient):
                     "happeningOn": datetime.datetime(2019, 5, 17),
                     "Tags": ["women", "mums", "ladies"]
         }
-
-        res = self.client.post("/api/v2/meetups", json=meetup, content_type='application/json')
+        res = self.client.post("/api/v2/meetups", json=meetup, headers=self.headers)
         self.assertEqual(res.status_code, 201)
         self.assertIn('Meetup added successfully', str(res.data))
 
-        res = self.client.post("/api/v2/meetups", json=meetup_two, content_type='application/json')
+        res = self.client.post("/api/v2/meetups", json=meetup_two, headers=self.headers)
         self.assertEqual(res.status_code, 400)
         self.assertIn('Field value was empty:', str(res.data))
 
         res = self.client.post("/api/v2/meetups", json=meetup_empty,
-                               content_type='application/json')
+                               headers=self.headers)
         self.assertEqual(res.status_code, 400)
         self.assertIn('sent an empty request', str(res.data))
 
@@ -62,11 +61,11 @@ class MeetupTest(SetUpTestClient):
                 "happeningOn": datetime.datetime(2019, 5, 17),
                 "Tags": ["women", "mums", "ladies"]
         }
-        res = self.client.post("/api/v2/meetups", json=meetup, content_type='application/json')
+        res = self.client.post("/api/v2/meetups", json=meetup, headers=self.headers)
         self.assertEqual(res.status_code, 201)
-        res = self.client.post("/api/v2/meetups", json=meetup_one, content_type='application/json')
+        res = self.client.post("/api/v2/meetups", json=meetup_one, headers=self.headers)
         self.assertEqual(res.status_code, 400)
-        res = self.client.post("/api/v2/meetups", json=meetup_two, content_type='application/json')
+        res = self.client.post("/api/v2/meetups", json=meetup_two, headers=self.headers)
         self.assertEqual(res.status_code, 201)
 
         res = self.client.get("/api/v2/meetups/upcoming")
@@ -89,9 +88,9 @@ class MeetupTest(SetUpTestClient):
                 "happeningOn": datetime.datetime(2019, 5, 17),
                 "Tags": ["law", "medicine", "Education"]
         }
-        res = self.client.post("/api/v2/meetups", json=meetup, content_type='application/json')
+        res = self.client.post("/api/v2/meetups", json=meetup, headers=self.headers)
         self.assertEqual(res.status_code, 201)
-        res = self.client.post("/api/v2/meetups", json=meetup_one, content_type='application/json')
+        res = self.client.post("/api/v2/meetups", json=meetup_one, headers=self.headers)
         self.assertEqual(res.status_code, 201)
 
         res = self.client.get("/api/v2/meetups/1")
@@ -122,25 +121,21 @@ class MeetupTest(SetUpTestClient):
                 "Tags": ["law", "medicine", "Education"]
         }
         rsvp = {
-                 "meetup": 1,
-                 "user": 1,
                  "response": "Yes"
         }
         rsvp_two = {
-                "meetup": 50,
-                "user": 1,
                 "response": "Yes"
         }
         res = self.client.post("/api/v2/meetups", json=meetup,
-                               content_type='application/json')
-        self.assertEqual(res.status_code, 200)
-        res = self.client.post("/api/v2/meetups", json=meetup_one,
-                               content_type='application/json')
-        self.assertEqual(res.status_code, 200)
-
-        res = self.client.post("/api/v2/meetups/1/rsvp", json=rsvp,
-                               content_type='application/json')
+                               headers=self.headers)
         self.assertEqual(res.status_code, 201)
+        res = self.client.post("/api/v2/meetups", json=meetup_one,
+                               headers=self.headers)
+        self.assertEqual(res.status_code, 201)
+
+        res = self.client.post("/api/v2/meetups/10000/rsvp", json=rsvp,
+                               headers=self.headers)
+        self.assertEqual(res.status_code, 404)
         res = self.client.post("/api/v2/meetups/50/rsvp", json=rsvp_two,
-                               content_type='application/json')
+                               headers=self.headers)
         self.assertEqual(res.status_code, 404)
