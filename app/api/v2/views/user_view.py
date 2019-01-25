@@ -20,3 +20,8 @@ def add_user():
 @userV2.route('/auth/login/', methods=['POST'])
 def login_user():
 	return users_model.login_user(request)
+
+@userV2.route('/auth/update/', methods=['POST'])
+@users_model.token_required
+def update_user():
+	return users_model.update_user(request)

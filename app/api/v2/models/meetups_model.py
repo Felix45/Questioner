@@ -36,8 +36,8 @@ class MeetUpsModel():
         token = request.headers.get('Authorization').split()[1]
         user_id = jwt.decode(token, 'Felix45', algorithms=['HS256'])
         
-        if not UsersModel().get_logged_in_user(user_id):
-            return jsonify({'msg': 'You can not add a meetup', 'status': 403}), 403
+        if not UsersModel().get_admin_user(user_id):
+            return jsonify({'msg': 'You can not add a meetup, only admin', 'status': 403}), 403
 
         columns = 'user_id, location, images, topic, happeningOn, Tags,\
                    created_on'
@@ -69,8 +69,9 @@ class MeetUpsModel():
     
     def delete_meetup(self, meetup_id):
         token = request.headers.get('Authorization').split()[1]
-        if not UsersModel().get_logged_in_user(token):
-            return jsonify({'msg': 'You can not  a meetup', 'status': 403}), 403
+        user_id = jwt.decode(token, 'Felix45', algorithms=['HS256'])
+        if not UsersModel().get_admin_user(user_id):
+            return jsonify({'msg': 'You can not delete a meetup, only admin can', 'status': 403}), 403
         
         expression = "id={0}".format(meetup_id)
         meetup = database.find_in_db('meetups', expression)

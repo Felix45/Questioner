@@ -8,6 +8,7 @@ Jinja2==2.10
 MarkupSafe==1.1.0
 more-itertools==5.0.0
 pathlib2==2.3.3
+psycopg2-binary==2.7.6.1
 pluggy==0.8.0
 py==1.7.0
 pytest==4.1.0

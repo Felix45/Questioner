@@ -143,7 +143,29 @@ class UsersModel:
     def get_logged_in_user(self, user_id):
         ''' Returns details of logged in user '''
         
+        expression = "id=%d" % (user_id['user'])
+        user = database.find_in_db('users', expression)
+
+        return user
+
+    def get_admin_user(self, user_id):
+        ''' Returns whether the user is admin '''
         expression = "isadmin='%s' AND id=%d" % (str(True).lower(), user_id['user'])
         user = database.find_in_db('users', expression)
 
         return user
+
+    def update_user(self, user_request):
+        userId = user_request.get_json()['id']
+        token = request.headers.get('Authorization').split()[1]
+
+        user_id = jwt.decode(token, 'Felix45', algorithms=['HS256'])
+
+        user = UsersModel().get_admin_user(user_id)
+        if user:
+            expression = "isadmin='true'"
+            database.update_columns_record('users', expression, 'id', userId)
+            return jsonify({'msg': 'User is now an admin','status':201}), 201
+        else:
+            return jsonify({'msg': 'Only admin can update user to admin','status':403}), 403
+            
