@@ -75,7 +75,8 @@ class UsersModel:
         new_user['phone_number'] = user_request.get_json()['phoneNumber']
 
         if not re.match(r'[0-9]', new_user['phone_number']):
-            return jsonify({'msg': 'Phone number is not correct', 'status': 400}), 400
+            return jsonify({'msg': 'Phone number is not correct', 'status':
+                            400}), 400
 
         columns = 'firstname, lastname, othername, username, email, password, \
                    registered, isadmin, phone_number'
