@@ -17,13 +17,8 @@ def get_question(question_id):
 	return questions_model.get_a_question(question_id)
 
 
-@questionV1.route("/questions/<int:question_id>/upvote", methods=['PATCH'])
-def up_vote(question_id):
-	return questions_model.vote(vote=1, question_id=question_id, type="upvote")
-
-
-@questionV1.route("/questions/<int:question_id>/downvote", methods=['PATCH'])
-def down_vote(question_id):
-	return questions_model.vote(vote=-1, question_id=question_id, type="downvote")
+@questionV1.route("/questions/<int:question_id>/<string:vote>", methods=['PATCH'])
+def vote(question_id, vote):
+	return questions_model.vote(question_id=question_id, type=vote)
 
 

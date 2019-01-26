@@ -14,6 +14,7 @@ users_model = UsersModel()
 def add_question():
 	return questions_model.add_a_question(request)
 
+
 @questionV2.route('/questions/<int:question_id>', methods=['GET'])
 def get_question(question_id):
 	return questions_model.get_a_question(question_id)
@@ -23,4 +24,3 @@ def get_question(question_id):
 @users_model.token_required
 def vote(question_id, vote):
 	return questions_model.vote(question_id, vote)
-
