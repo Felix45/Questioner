@@ -136,7 +136,7 @@ class UsersModel:
             token = jwt.encode({"user": users[0]['id'],
                                 "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
                                 }, 'Felix45', algorithm='HS256').decode('UTF-8')
-            return jsonify({'msg': 'logged in', "data": users, "token":
+            return jsonify({'msg': 'logged in', "token":
                             token, "status": 200}), 200
         return jsonify({'msg': 'user {} not found:'.format(username), "status":
                         404}), 404
