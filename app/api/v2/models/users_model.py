@@ -168,5 +168,4 @@ class UsersModel:
             database.update_columns_record('users', expression, 'id', userId)
             return jsonify({'msg': 'User is now an admin','status':201}), 201
         else:
-            return jsonify({'msg': 'Only admin can update user to admin','status':403}), 403
-            
+            return jsonify({'msg': 'Only admin can update a user to be an admin','status':403}), 403
