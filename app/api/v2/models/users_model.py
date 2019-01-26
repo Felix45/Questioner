@@ -24,7 +24,7 @@ class UsersModel:
         """ register a user """
         global users, database
         keys_expected = ['firstname', 'lastname', 'othername', 'username',
-                         'email', 'isAdmin', 'password', 'cpassword',
+                         'email', 'password', 'cpassword',
                          'phoneNumber']
  
         ret = helpers.is_valid_user_request(keys_expected, user_request)
@@ -71,7 +71,7 @@ class UsersModel:
         new_user['email'] = user_request.get_json()['email']
         new_user['password'] = generate_password_hash(password)
         new_user['registered'] = str(date.today())
-        new_user['isadmin'] = user_request.get_json()['isAdmin']
+        new_user['isadmin'] = 'false'
         new_user['phone_number'] = user_request.get_json()['phoneNumber']
 
         if not re.match(r'[0-9]', new_user['phone_number']):
