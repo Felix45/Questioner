@@ -41,9 +41,8 @@ class CommentsModel():
         valid_user = database.find_in_db("users", "Id=%d" % (user_id['user']))
         valid_question = database.find_in_db('questions', 'Id=%d'
                                              % (data['question_id']))
-                                             
-        if len(valid_user) == 0 or len(valid_question) == 0:
-            return jsonify({'error': 'Either question or users does not exist'
+        if len(valid_question) == 0:
+            return jsonify({'error': 'This question does not exist for you to post a comment'
                             , 'status': 404}), 404
 
         return self.insert_comment(data)

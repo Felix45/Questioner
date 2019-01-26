@@ -14,18 +14,20 @@ class DatabaseHelper:
     def insert_into_db(self, table, columns, values, record):
         """ INSERT INTO A TABLE """
         cursor = self.conn.cursor()
+        data = []
         sql = "INSERT INTO {table} ({col}) VALUES ({val})".format(table=table,
                                                                    col=columns,
                                                                    val=values
                                                                    )
         try:
             cursor.execute(sql)
+            data = self.fethall_records(table)
         except:
             return jsonify({'msg': '{} not added successfully'.format(record),
                             'status': 400}), 400
         self.conn.commit()
         return jsonify({'msg': '{} added successfully'.format(record),
-                        'status': 201}), 201
+                        'status': 201, "data": data[0]}), 201
 
     def find_in_db(self, table, field):
         """ Find an Item in a database """
@@ -66,7 +68,7 @@ class DatabaseHelper:
     def fethall_records(self, tbl):
         """ Fetch all records in a database """
         cursor = self.conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        sql = "SELECT * FROM {table} ".format(table=tbl)
+        sql = "SELECT * FROM {table} ORDER BY id DESC".format(table=tbl)
         cursor.execute(sql)
         row = cursor.fetchall()
         return self.result_in_dict(row)

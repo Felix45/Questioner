@@ -75,7 +75,8 @@ class UsersModel:
         new_user['phone_number'] = user_request.get_json()['phoneNumber']
 
         if not re.match(r'[0-9]', new_user['phone_number']):
-            return jsonify({'msg': 'Phone number is not correct', 'status': 400}), 400
+            return jsonify({'msg': 'Phone number is not correct', 'status':
+                            400}), 400
 
         columns = 'firstname, lastname, othername, username, email, password, \
                    registered, isadmin, phone_number'
@@ -135,7 +136,7 @@ class UsersModel:
             token = jwt.encode({"user": users[0]['id'],
                                 "exp": datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
                                 }, 'Felix45', algorithm='HS256').decode('UTF-8')
-            return jsonify({'msg': 'logged in', "data": users, "token":
+            return jsonify({'msg': 'logged in', "token":
                             token, "status": 200}), 200
         return jsonify({'msg': 'user {} not found:'.format(username), "status":
                         404}), 404
@@ -167,5 +168,4 @@ class UsersModel:
             database.update_columns_record('users', expression, 'id', userId)
             return jsonify({'msg': 'User is now an admin','status':201}), 201
         else:
-            return jsonify({'msg': 'Only admin can update user to admin','status':403}), 403
-            
+            return jsonify({'msg': 'Only admin can update a user to be an admin','status':403}), 403

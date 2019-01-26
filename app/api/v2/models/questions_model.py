@@ -48,15 +48,16 @@ class QuestionsModel():
         
         if question and type == 'upvote':
             expression = "votes=votes+1"
-            return database.update_columns_record('questions', expression, 'id', question_id)
+            database.update_columns_record('questions', expression, 'id', question_id)
         elif question and type == 'downvote':
             expression = "votes=votes-1"
-            return database.update_columns_record('questions', expression, 'id', question_id)
+            database.update_columns_record('questions', expression, 'id', question_id)
         else:
-            return jsonify({"msg": "Question was not found", "status": 404}), 404  
-            
+            return jsonify({"msg": "Question was not found", "status": 404}), 404 
+
+        question = database.find_in_db('questions','id=%d'%(question_id,))    
         return jsonify({"msg": "{} was successful".format(type),
-                            "status": 201, "data": self.questions}), 201
+                            "status": 201, "data": question}), 201
 
     def get_a_question(self, search_id):
         """ Returns a specific question record """

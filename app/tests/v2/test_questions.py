@@ -41,12 +41,12 @@ class QuestionsTest(SetUpTestClient):
         res = self.client.patch("/api/v2/questions/1/upvote", json=question,
                                 headers=self.headers)
         self.assertEqual(res.status_code, 201)
-        self.assertIn("Update was successful", str(res.data))
+        self.assertIn("upvote was successful", str(res.data))
 
         res = self.client.patch("/api/v2/questions/1/downvote", json=question,
                                 headers=self.headers)
         self.assertEqual(res.status_code, 201)
-        self.assertIn("Update was successful", str(res.data))
+        self.assertIn("downvote was successful", str(res.data))
 
     def test_get_a_question(self):
         """ Allows a user to fetch a specific question """

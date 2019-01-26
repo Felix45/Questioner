@@ -2,6 +2,7 @@
 from datetime import date
 import json
 import jwt
+import re
 from flask import Flask, request, jsonify
 from app.api.v2.utils.user_validator import UsersHelper
 from app.api.v2.utils.database_helper import DatabaseHelper
@@ -24,7 +25,8 @@ class MeetUpsModel():
 
         keys_expected = ["location", "images", "topic", "happeningOn", "Tags"]
 
-        result = self.helpers.is_valid_user_request(keys_expected, user_request)
+        result = self.helpers.is_valid_user_request(keys_expected,
+                                                    user_request)
 
         if result[0] == 0:
             return result[1], 400
@@ -35,14 +37,15 @@ class MeetUpsModel():
             return result[1], 400
         token = request.headers.get('Authorization').split()[1]
         user_id = jwt.decode(token, 'Felix45', algorithms=['HS256'])
-        
+   
         if not UsersModel().get_admin_user(user_id):
             return jsonify({'msg': 'You can not add a meetup, only admin', 'status': 403}), 403
 
         columns = 'user_id, location, images, topic, happeningOn, Tags,\
                    created_on'
-        images = ",".join(meetup['images'])
-        tags = ",".join(meetup['Tags'])
+        
+        images = self.construct_list(meetup['images'])
+        tags = self.construct_list(meetup['Tags'])
         
         values = "%d,'%s','%s','%s','%s','%s','%s'" % (user_id['user'],
                   meetup['location'],
@@ -55,6 +58,9 @@ class MeetUpsModel():
         expression = "happeningon >= '{0}'".format(date.today())
         self.meetups = database.find_in_db('meetups', expression)
         if self.meetups:
+            for meetup in self.meetups:
+                meetup['tags'] = self.construct_list(meetup['tags'], True)
+                meetup['images'] = self.construct_list(meetup['images'], True)
             return jsonify({"msg": "Meetups were found", "data": self.meetups, "status": 200})
         return jsonify({"msg": "Meetups were not found", "data": self.meetups, "status": 404})
 
@@ -64,6 +70,10 @@ class MeetUpsModel():
         meetup = database.find_in_db('meetups', expression)
         
         if meetup:
+            meetup[0]['tags'] = self.construct_list(meetup[0]['tags'],
+                                                    fetch_items=True)
+            meetup[0]['images'] = self.construct_list(meetup[0]['images'],
+                                                      fetch_items=True)
             return jsonify({"msg": "Meetup was found", "data": meetup, "status": 200})   
         return jsonify({"msg": "Meetup was not found", "data": [], "status": 404}), 404
     
@@ -82,4 +92,11 @@ class MeetUpsModel():
                             'data': meetup}), 200 
         return jsonify({"msg": "meetup was not found", "status": 404, "data": 
                         meetup}), 404
- 
+
+    def construct_list(self, item, fetch_items=False):
+        ''' Ensures items are stored in lists '''
+        if type(item) is list:
+            return ','.join(item)
+        elif fetch_items:
+            return item.split(',')
+        return str(item)
