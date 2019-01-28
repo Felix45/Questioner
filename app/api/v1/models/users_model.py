@@ -6,7 +6,7 @@ from functools import wraps
 
 from flask import Flask, jsonify, request
 from werkzeug.security import generate_password_hash, check_password_hash
-from app.api.v2.utils.user_validator import UsersHelper
+from app.api.v1.utils.user_validator import UsersHelper
 
 
 users = []
@@ -21,16 +21,20 @@ class UsersModel:
         keys_expected = ['firstname', 'lastname', 'othername', 'username',
                          'email', 'isAdmin', 'password', 'cpassword',
                          'phoneNumber']
+        error = {}
 
         ret = helpers.is_valid_user_request(keys_expected, user_request)
 
         if ret[0] == 0:
-            return ret[1], 400
+            error['invalid_request'] = ret[1]
 
         ret = helpers.is_blank_field(user_request)
 
         if ret[0] == 0:
-            return ret[1], 400
+            error['blank_field'] = ret[1]
+
+        if error:
+            return jsonify({'message': error}), 400
 
         ret = helpers.is_available(user_request.get_json()['email'], 'email',
                                    users, user_id=0)
