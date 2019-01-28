@@ -32,7 +32,7 @@ class DbConnection:
 
     def create_database_tables(self):
         """ Create all database tables """
-        
+
         TABLE_USERS = """ 
                              CREATE TABLE IF NOT EXISTS users (
                                 Id serial PRIMARY KEY NOT NULL,
@@ -112,7 +112,7 @@ class DbConnection:
         #curs.execute(self.db_clean())
         for query in self.create_database_tables()[0]:
             curs.execute(query)
-        
+
     def commit_changes(self):
         """ Commits changes to database """
         self.get_connection().commit()
