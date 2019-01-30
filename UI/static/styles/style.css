@@ -377,11 +377,13 @@ main ol li span{
 .modal{
 	width: 100%;
 	height: 100%;
-	position:absolute;
+	position:fixed;
 	left:0;
 	top:0;
 	display: none;
 	z-index: 99999;
+	overflow-y: scroll;
+	background-color: rgba(0,0,0,0.9)
 }
 .modal .dashboard p{
 	padding: 10px 10px 0;
@@ -392,6 +394,7 @@ main ol li span{
 	position: relative;
 	margin: 170px auto;
 	position: relative;
+	
 	border: 1px solid #ddd;
 	background-color: #fff;
 }
