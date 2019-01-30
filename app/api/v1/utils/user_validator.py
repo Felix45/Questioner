@@ -9,23 +9,23 @@ class UsersHelper:
 		
 	def is_valid_user_request(self, keys_expected, user_request):
 		if len(user_request.get_json().keys()) == 0:
-			return 0, jsonify({'message': 'sent an empty request'})
+			return 0, 'sent an empty request'
 			
 		sent_keys = user_request.get_json().keys()
 		
 		for key in keys_expected:
 			if key not in sent_keys:
-				return 0, jsonify({'message': 'You must provide a {}'.format(key)})
+				return 0, 'You must provide a {}'.format(key)
 
-		return 1	, jsonify({'message': 'user request was valid'})
+		return 1	, 'user request was valid'
 		
 	def is_blank_field(self, user_request):
 		
 		for key, user_item in user_request.get_json().items():
 			if user_item == '':
-				return False, jsonify({'message': 'Field value was empty: {}'.format(key)})
+				return False, 'Field value was empty: {}'.format(key)
 				
-		return True, jsonify({'message': ''})
+		return True, ''
 		
 	def is_available(self, value, key, users, user_id=0):
 		for user in users:

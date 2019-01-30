@@ -34,18 +34,22 @@ class QuestionsModel():
         self.questions.append(question)
         return jsonify({"msg": "question was added", "data":self.questions, "status": 201}), 201
 
-    def vote(self, vote, question_id, type):
+    def vote(self, question_id, type):
         """ Allows a user to upvote or downvote a question """
 
         question = [quiz for quiz in self.questions if quiz["id"] == question_id]
       
-        if question:
-            question[0]["votes"] = int(question[0]["votes"]) + int(vote)
-            question[0]["votes"] = 0 if question[0]["votes"] < 0 else question[0]["votes"]
-            return jsonify({"msg": "{} was successful".format(type),
+        if question and type == 'upvote':
+            question[0]["votes"] = int(question[0]["votes"]) + 1
+        elif question and type == 'downvote':
+            question[0]["votes"] = 0 if question[0]["votes"] <= 0 else question[0]["votes"] - 1
+        else:
+            return jsonify({"msg": "Question was not found", "status": 404}), 404  
+        
+        return jsonify({"msg": "{} was successful".format(type),
                             "status": 201, "data": self.questions}), 201
 
-        return jsonify({"msg": "Question was not found", "status": 404}), 404  
+        
 
     def get_a_question(self, search_id):
         """ Returns a specific question record """
