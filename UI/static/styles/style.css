@@ -431,14 +431,14 @@ footer a{
 	color: #fff;
 }
 footer #scroll-top{
-	padding: 15px;
-   position: absolute;
-   right: 30px;
-   bottom: 75px;
    color: #fff;
-   cursor: pointer;
-   border-radius: 5px;
-   background-color: #000;
+    margin: 0;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    padding: 20px 20px 40px 20px;
+    position: relative;
+    background-color: #009688;
 }
 
 /* Columns for mobile phones */
