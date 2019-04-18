@@ -420,6 +420,7 @@ main ol li span{
 footer{
     color: #fff;
     margin: 0; 
+    margin-top: 200px;
     width: 100%;
     padding: 50px;
     position: relative;
