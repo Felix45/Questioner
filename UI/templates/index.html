@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Questioner - Questioner helps a meetup organizer prioritize questions to be answered</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width , initial-scale=1.0">
+		<link rel="stylesheet" href="../static/styles/style.css" />
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="../static/js/main.js"></script> 
+	</head>
+	
+	<body id="top">
+		<!-- Content of body section -->
+		
+		<div class="container">
+		 <header>
+			<div class="row">
+				<!-- Uniform application header section -->
+					<div class="column-lg-2 column-md-2 column-sm-1 column-xs-2">
+						<div class="logo">
+						  <a href="index.html" title="go to home">
+							<img src="../static/images/logo.png" class="img" alt="Questioner" />		
+						  </a>				
+						</div>
+						<div class="logo-mobile">
+							<button class="button-rounded" onclick="menuDrawer()">
+								<span class="fa fa-list fa-2x"></span>
+							</button>
+						</div>
+					</div>
+					<div class="column-lg-6 column-md-6 column-sm-6 column-xs-10">
+						<form method="post" action="">
+							<input type="search" name="search" placeholder="Search Meetup" class="input input-long" />
+							<button type="submit" class="button button-short"><span class="fa fa-search"></span></button>						
+						</form>
+					</div>
+					<div class="column-lg-4 column-md-4 column-sm-4 column-xs-4">
+					  <nav class="menu">
+						<ul>
+							<li><a href="admindash.html"> <span class="fa fa-user-o"></span> Administrator </a></li>	
+							<li><a href="login.html"> <span class="fa fa-sign-in"></span> Login </a> </li>	
+							<li><a href="registration.html"> <span class="fa fa-user-o"></span> Sign Up </a></li>				
+						</ul>	
+					   </nav>				
+					</div>				
+				
+				<!-- End uniform application header section -->
+			</div>
+		</header>
+			
+			
+			<!-- Start the popular meetups section -->
+		<main>
+			<div class="row">
+				<h2>Popular Meetups</h2>
+				<div class="column-lg-3 column-md-3 column-sm-4 column-xs-6">
+					<div class="cards">
+						<h4>Artificial Intelligence</h4>
+						<div class="meetup">
+							<a href="postquestion.html">
+								<img src="../static/images/artificial.jpg" class="img" alt="Artificial Intelligence">	
+							</a>
+							<div class="meetup-details">
+								<span class="fa fa-calendar fa-lg"></span>
+								<span>  12/01/2019  Venue: Base </span>
+							</div>					
+						</div>
+						<a href="postquestion.html">
+							<span class="attending" title="People attending">10</span>
+						</a>
+					</div>
+				</div>	
+				
+				<div class="column-lg-3 column-md-3 column-sm-4 column-xs-6">
+					<div class="cards">
+						<h4>Game Development</h4>
+						<div class="meetup">
+							<a href="postquestion.html">
+								<img src="../static/images/gamedevelopment.png" class="img" alt="Game Development">
+							</a>	
+							<div class="meetup-details">
+								<span class="fa fa-calendar fa-lg"></span>
+								<span>  12/01/2019  Venue: Base </span>
+							</div>						
+						</div>
+						<a href="postquestion.html">
+							<span class="attending" title="People attending">10</span>
+						</a>
+					</div>
+				</div>	
+				
+				<div class="column-lg-3 column-md-3 column-sm-4 column-xs-6">
+					<div class="cards">
+						<h4>Python Data Science</h4>
+						<div class="meetup">
+						   <a href="postquestion.html">
+								<img src="../static/images/python.jpg" class="img" alt="Python Data Science">	
+							</a>
+							<div class="meetup-details">
+								<span class="fa fa-calendar fa-lg"></span>
+								<span>  12/01/2019  Venue: Base </span>
+							</div>						
+						</div>
+						<a href="postquestion.html">
+							<span class="attending" title="People attending">10</span>
+						</a>
+					</div>
+				</div>	
+				
+				<div class="column-lg-3 column-md-3 column-sm-4 column-xs-6">
+					<div class="cards">
+						<h4>Virtual Reality</h4>
+						<div class="meetup">
+							<a href="postquestion.html">
+								<img src="../static/images/var.jpg" class="img" alt="Virtual Reality">	
+							</a>
+							<div class="meetup-details">
+								<span class="fa fa-calendar fa-lg"></span>
+								<span>  12/01/2019  Venue: Base </span>
+							</div>						
+						</div>
+						<a href="postquestion.html">
+							<span class="attending" title="People attending">07</span>
+						</a>
+					</div>
+				</div>	
+				
+			
+				<div class="column-lg-3 column-md-3 column-sm-4 column-xs-6">
+					<div class="cards">
+						<h4>Artificial Intelligence</h4>
+						<div class="meetup">
+							<a href="postquestion.html">
+								<img src="../static/images/artificial.jpg" class="img" alt="Artificial Intelligence">	
+							</a>
+							<div class="meetup-details">
+								<span class="fa fa-calendar fa-lg"></span>
+								<span>  12/01/2019  Venue: Base </span>
+							</div>						
+						</div>
+						<a href="postquestion.html">
+							<span class="attending" title="People attending">01</span>
+						</a>
+					</div>
+				</div>	
+				
+				<div class="column-lg-3 column-md-3 column-sm-4 column-xs-6">
+					<div class="cards">
+						<h4>Cake Baking</h4>
+						<div class="meetup">
+							<a href="postquestion.html">
+								<img src="../static/images/cakebaking.jpg" class="img" alt="Cake baking">	
+							</a>
+							<div class="meetup-details">
+								<span class="fa fa-calendar fa-lg"></span>
+								<span>  12/01/2019  Venue: Base </span>
+							</div>						
+						</div>
+						<a href="postquestion.html">
+							<span class="attending" title="People attending">05</span>
+						</a>
+					</div>
+				</div>	
+				
+				<div class="column-lg-3 column-md-3 column-sm-4 column-xs-6">
+					<div class="cards">
+						<h4>Alcoholics Annonymous</h4>
+						<div class="meetup">
+							<a href="postquestion.html">
+								<img src="../static/images/alcoholics.jpg" class="img" alt="Alcoholics Annonymous">	
+							</a>
+							<div class="meetup-details">
+								<span class="fa fa-calendar fa-lg"></span>
+								<span>  12/01/2019  Venue: Base </span>
+							</div>						
+						</div>
+						<a href="postquestion.html">
+							<span class="attending" title="People attending">12</span>
+						</a>
+					</div>
+				</div>	
+				
+				<div class="column-lg-3 column-md-3 column-sm-4 column-xs-6">
+					<div class="cards">
+						<h4>Constitution Talk</h4>
+						<div class="meetup">
+							<a href="postquestion.html">
+								<img src="../static/images/parliament.jpg" class="img" alt="Constitution Talk">	
+							</a>	
+							<div class="meetup-details">
+								<span class="fa fa-calendar fa-lg"></span>
+								<span>  12/01/2019  Venue: Base </span>
+							</div>					
+						</div>
+						<a href="postquestion.html">
+							<span class="attending" title="People attending">10</span>
+						</a>
+					</div>
+				</div>	
+						
+			</div>
+			
+			<!-- End the popular meetups section -->	
+
+			<!-- Add readmore section-->
+			<div class="row">
+				<div class="column-lg-12 column-md-12 column-sm-12 column-xs-12 center-text">
+					<a href="meetups.html" class="button"> View More &raquo; </a>
+				</div>
+			</div>
+			<!-- End the readmore section -->	
+		</main>
+	 </div>
+		
+		<!-- Start footer section -->
+		<footer>
+			<div class="column-lg-12 column-md-12 column-sm-12 column-xs-12">
+				<a href="index.html" title="Questioner">&copy;Questioner 2019</a>
+				<a id="scroll-top" href="#top" class="fa fa-angle-up fa-lg">
+				
+				</a>
+			</div>		
+		</footer>
+		
+		<!-- End the footer section -->
+	   
+	   <!-- Drawer menu for tablet and mobile devices -->
+	    <div class="drawer-menu" id="mobile-menu">
+	    	<ul>
+				<li><a href="index.html"><span class="fa fa-home"></span> Questioner </a></li>
+				<li><a href="login.html"><span class="fa fa-sign-in"></span> Sign In </a></li>
+				<li><a href="registration.html"><span class="fa fa-user-o"></span> Sign Up </a></li>
+				<li><a href="profile.html"><span class="fa fa-user-o"></span> Account(Felix45)</a></li>	  
+				<li><a href="admindash.html"><span class="fa fa-user-o"></span> Administrator</a></li>	    	
+	    	</ul>
+	    </div>
+	   
+	   <!-- End Drawer menu -->
+	
+		<!-- End of body section -->
+	</body>
+</html>

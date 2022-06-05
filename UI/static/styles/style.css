@@ -1,0 +1,678 @@
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	
+}
+@font-face{
+		src:url('https://fonts.googleapis.com/css?family=Raleway')
+
+}
+html,body{
+	width:100%;
+	height:100%;
+}
+body, div, p , h1 , h2 , h3 , h4 , h5 , h6 , ul , ol , form{
+		font-family: 'Raleway';
+		margin: 0;
+		padding: 0;
+}
+ul , li{
+	list-style-type: none;
+}
+
+a{
+		text-decoration: none;
+}
+.container{
+	width: auto;
+	height: auto;
+	margin: 0 auto;
+	padding-left: 15px;
+	padding-right: 15px;
+	position: relative;	
+}
+
+.container::before, .container::after {
+    content: " ";
+    display: table;
+}
+
+.row{
+	margin: 0 -15px;
+
+}
+div[class*='column-']{
+	float:left;
+	position: relative;
+	padding: 10px 15px;
+}
+
+
+.row::before, .row::after {
+    content: " ";
+    display: table;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.img{
+		width: auto;
+		max-width: 100%;
+		display: block;
+		margin: auto;
+		
+}
+.center-text{
+		text-align: center;
+}
+.success{
+		background-color: #009688;
+}
+.success-text{
+	    color: #009688;
+}
+.danger{
+		background-color: #ff8080;
+}
+.danger-text{
+		color: #ff8080;
+		font-weight: normal;
+}
+.info{
+		background-color: #00bfff;
+}
+.info-text{
+	color: #00bfff;
+}
+.warning{
+		background-color: #9f6060;
+}
+.warning-text{
+		color: #9f6060;
+}
+.divider{
+		border-bottom:1px solid #ddd;
+}
+
+.input{
+		border: 1px solid #ddd;
+		padding: 10px;
+}
+.input-field{
+	width: 90%;
+	display: block;
+	margin: 10px auto;
+}
+.input-long{
+	width:80%;
+}
+.button{
+		cursor: pointer;
+		padding: 10px 20px;
+		color: #fff;
+		border: 1px solid #009688;
+		background-color: #009688;
+}
+.button-short{
+	width:10%;
+}
+.button-rounded{
+	cursor: pointer;
+	color: #ddd;
+	border:1px solid #ddd;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;	
+}
+header{
+		position: fixed;
+		top: 0;
+		left: 0;
+		margin: 0;
+		width: 100%;
+		z-index: 9999;
+		background-color: #fff;
+		border-bottom: 1px solid #ddd;
+		-moz-box-shadow: 5px 5px 5px #ddd;
+		-webkit-box-shadow: 5px 5px 5px #ddd;
+		box-shadow: 5px 5px 5px #ddd;
+}
+header .logo , header .menu{
+		display: none;
+}
+header .logo-mobile button{
+		padding: 5px;
+		margin-left: 20px;
+		background-color: #fff;
+}
+
+.menu li{
+		padding: 15px 0;
+		display: inline-block;
+}
+.menu li a{
+	color: #009688;
+	padding: 10px;
+}
+.block{
+	display: block;
+}
+.no-box-shadow , .cards.user{
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+main{
+			margin-top: 100px;
+}
+main h2{
+	 color: #009688;
+    font-weight: normal;
+    padding-bottom: 10px;
+    margin: 0 15px 10px 15px;
+    border-bottom: 1px solid #ddd;
+}
+main .cards , .modal .cards{
+	position:relative;
+	padding: 10px;
+	margin-bottom: 30px;
+	border: 1px solid #ddd;
+	-webkit-box-shadow: 0 2px 5px 0 #ddd,0 2px 10px 0 #ddd;
+	-moz-box-shadow: 0 2px 5px 0 #ddd,0 2px 10px 0 #ddd;
+	box-shadow: 0 2px 5px 0 #ddd,0 2px 10px 0 #ddd;
+}
+main .cards h4 , .modal .cards h4{
+	font-weight: normal;
+	padding: 10px 0px;
+	border-bottom: 1px solid #ddd;
+}
+main .cards .meetup , .modal .cards .meetup{
+	margin-top: 10px;
+}
+
+main .cards .attending , .modal .cards .attending{
+	 padding: 15px;
+    cursor: pointer;
+    position: absolute;
+    right: -15px;
+    bottom: 30px;
+    background: #009688;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+}
+main .meetup .meetup-details, .modal .meetup .meetup-details{
+	font-size: 12px;
+	font-weight: bold;
+	padding: 5px;
+
+}
+main .cards .delete-meetup  , .modal .cards .delete-meetup{
+	background: #ff8080;
+}
+main form{
+	width: 100%;
+	margin: auto;
+	padding: 50px 8px;
+	border: 1px solid #ddd;
+   -webkit-box-shadow: 0 2px 5px 0 #ddd, 0 2px 10px 0 #ddd;
+   -moz-box-shadow: 0 2px 5px 0 #ddd,0 2px 10px 0 #ddd;
+   box-shadow: 0 2px 5px 0 #ddd, 0 2px 10px 0 #ddd;
+	
+}
+main form textarea{
+	width: 100%;
+	padding: 20px;
+}
+main .form-inline{
+	padding: 10px;
+	border: none;
+	-webkit-box-shadow:
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+main .form-inline button{
+	float: right;
+}
+main form a {
+	color: #009688;
+}
+main form fieldset{
+	color: #000;
+	border:1px solid #ddd;
+}
+main form fieldset legend{
+	margin-left: 20px;
+}
+
+main .dashboard{
+	border-left:1px solid #ddd;
+}
+main .profile{
+	color: #009688;
+}
+main .profile .admin-menu a{
+	color: #fff;
+	margin-top: 10px;
+	padding: 10px;
+}
+main .profile .fa-stack{
+	color: #009688;
+}
+main .admin{
+	margin: 25px 0 50px;
+}
+main .delete-meetup{
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+main .admin-action{
+	width: 100%;
+	margin:auto;
+	color: #fff;
+	/*background-color: #ddd;*/
+}
+main .admin-action a{
+	color: #fff;
+	padding: 50px 20px;
+}
+main .admin-action-type{
+	 padding: 20px;
+    border-radius: 50%;
+    color: #fff;
+    position: absolute;
+    top: -20px;
+    right: 30px;
+    border:1px solid #fff;
+}
+main .user p , main .user .meetup-details span{
+	padding: 0px 0px 5px 10px;
+
+}
+main ol{
+	margin: 0 15px 10px 15px;
+}
+main ol li{
+ padding: 10px 10px 30px;
+ border-bottom: 1px dotted #ddd;
+ list-style-type: upper-roman;
+}
+main ol li ul li{
+ font-size:14px;
+ border:none;
+ color: #000;
+ border-left: 2px solid #ff8080;
+ list-style-type: none;
+ padding: 5px 10px 0;
+ margin-left:20px;
+}
+main ol li p{
+	padding-bottom: 10px 10px 30px;
+}
+main ol li span{
+	margin-right: 10px;
+}
+.questions-vote{
+	color: #009688;
+	font-size: 14px;
+
+}
+
+
+.drawer-menu{
+	width: 100%;
+	height: 100%;
+	top:0;
+	left:0;
+	z-index: 9999;
+	position: fixed;
+	display: none;
+}
+.drawer-menu ul{
+	width: 70%;
+	height: 100%;
+	background-color: #fff;
+	border-right: 1px solid #ddd;
+}
+.drawer-menu ul li{
+	color: #009688;
+	padding: 10px;
+	border-bottom: 1px dotted #009688;
+}
+.drawer-menu ul li a{
+	color: #009688;
+	display: block;
+}
+.pagination {
+
+
+}
+.pagination li{
+	width:30px;
+	height:30px;
+	color:#009688;
+	display: inline-block;
+	border-bottom:none;
+	background-color: #fff;
+	border: 1px solid #009688;
+}
+.pagination li a{
+	color: #009688;
+
+}
+.pagination .active{
+	
+	background-color: #009688;
+}
+.pagination .active a{
+	color: #fff;
+}
+.modal{
+	width: 100%;
+	height: 100%;
+	position:fixed;
+	left:0;
+	top:0;
+	display: none;
+	z-index: 99999;
+	overflow-y: scroll;
+	background-color: rgba(0,0,0,0.9)
+}
+.modal .dashboard p{
+	padding: 10px 10px 0;
+
+}
+.modal .modal-body{
+	width:80%;
+	position: relative;
+	margin: 170px auto;
+	position: relative;
+	
+	border: 1px solid #ddd;
+	background-color: #fff;
+}
+.modal .modal-body .close{
+	cursor: pointer;
+	 color: #fff;
+    padding: 15px;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+}
+.modal .modal-body .cards{
+	border:none;
+	box-shadow: none;
+}
+.modal .modal-footer a{
+	border: none;
+   float: right;
+   margin-right: 20px;
+   background-color: #ff8080;
+}
+
+footer{
+    color: #fff;
+    margin: 0; 
+    margin-top: 100px;
+    width: 100%;
+    padding: 50px;
+    position: relative;
+    background-color: #009688;
+}
+footer a{
+	color: #fff;
+}
+footer #scroll-top{
+    color: #fff;
+    margin: 0;
+    right: 20px;
+    bottom: 50px;
+    height: 50px;
+    width: 50px;
+    z-index: 99999999;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    padding: 20px 20px 40px 20px;
+    position: fixed;
+    background-color: #000;
+}
+
+/* Columns for mobile phones */
+.column-xs-1{
+	width: 8.3333%;
+}
+.column-xs-2{
+	width: 16.6667%;
+}
+.column-xs-3{
+	width: 25%;
+}
+.column-xs-4{
+	width: 33.3333%;
+}
+.column-xs-5{
+	width: 41.6667%;
+}
+.column-xs-6{
+	width: 50%;
+}
+.column-xs-7{
+	width: 58.3333%;
+}
+.column-xs-8{
+	width: 66.66667%;
+}
+.column-xs-9{
+	width: 75%;
+}
+.column-xs-10{
+	width: 83.33333%;
+}
+.column-xs-11{
+	width: 91.66667%;
+}
+.column-xs-12{
+	width: 100%;
+}
+
+
+/* columns and styles for tablet */
+@media(min-width: 768px) and (max-width: 991px){
+		.container{
+			width: 750px;		
+		}
+		
+		.column-sm-1{
+			width: 8.3333%;
+		}
+		.column-sm-2{
+			width: 16.6667%;
+		}		
+		.column-sm-3{
+			width: 25%;
+		}
+		.column-sm-4{
+			width: 33.3333%;
+		}
+		.column-sm-5{
+			width: 41.6667%;
+		}
+		.column-sm-6{
+			width: 50%;
+		}
+		.column-sm-7{
+			width: 58.3333%;
+		}
+		.column-sm-8{
+			width: 66.66667%;
+		}
+		.column-sm-9{
+			width: 75%;
+		}
+		.column-sm-10{
+			width: 83.33333%;
+		}
+		.column-sm-11{
+			width: 91.66667%;
+		}
+		.column-sm-12{
+			width: 100%;
+		}
+		main form{
+			width: 60%;
+		}
+		main .form-inline{
+			width: 100%;
+		}
+		main .admin-action a{
+			font-size: 20px;
+		}
+		.modal .dashboard{
+			border-left:1px solid #ddd;
+		}
+}
+
+/*columns and styles for medium devices */
+@media(min-width: 992px) and (max-width: 1199px){
+	.container{
+			width: 970px;	
+	}
+	
+		.column-md-1{
+			width: 8.3333%;
+		}
+		.column-md-2{
+			width: 16.6667%;
+		}		
+		.column-md-3{
+			width: 25%;
+		}
+		.column-md-4{
+			width: 33.3333%;
+		}
+		.column-md-5{
+			width: 41.6667%;
+		}
+		.column-md-6{
+			width: 50%;
+		}
+		.column-md-7{
+			width: 58.3333%;
+		}
+		.column-md-8{
+			width: 66.66667%;
+		}
+		.column-md-9{
+			width: 75%;
+		}
+		.column-md-10{
+			width: 83.33333%;
+		}
+		.column-md-11{
+			width: 91.66667%;
+		}
+		.column-md-12{
+			width: 100%;
+		}
+		.input-long{
+			width:90%;
+			border-right: none;
+		}
+		.button-short{
+			float: right;
+		}
+		header .logo , header .menu{
+			display: block;
+		}
+		header .logo-mobile{ display: none; }
+
+		main form{
+			width: 50%;
+		}
+		main .form-inline{
+			width: 100%;
+		}
+		main .admin-action a{
+			font-size: 20px;
+		}
+		.modal .dashboard{
+			border-left:1px solid #ddd;
+		}
+}
+
+/*columns and styles for large devices */
+@media(min-width: 1200px){
+		.container{
+			width:1170px;		
+		}
+		
+		.column-lg-1{
+			width: 8.3333%;
+		}
+		.column-lg-2{
+			width: 16.6667%;
+		}		
+		.column-lg-3{
+			width: 25%;
+		}
+		.column-lg-4{
+			width: 33.3333%;
+		}
+		.column-lg-5{
+			width: 41.6667%;
+		}
+		.column-lg-6{
+			width: 50%;
+		}
+		.column-lg-7{
+			width: 58.3333%;
+		}
+		.column-lg-8{
+			width: 66.66667%;
+		}
+		.column-lg-9{
+			width: 75%;
+		}
+		.column-lg-10{
+			width: 83.33333%;
+		}
+		.column-lg-11{
+			width: 91.66667%;
+		}
+		.column-lg-12{
+			width: 100%;
+		}
+		
+		.input-long{
+			width:90%;
+			border-right: none;
+		}
+		.button-short{
+			float: right;
+		}
+		header .logo , header .menu{
+			display: block;
+		}
+		header .logo-mobile{ display: none; }
+
+		main form{
+			width: 50%;
+		}
+		main .form-inline{
+			width: 100%;
+		}
+		main .admin-action a{
+			font-size: 20px;
+		}
+		
+		.modal .dashboard{
+			border-left:1px solid #ddd;
+		}
+}
